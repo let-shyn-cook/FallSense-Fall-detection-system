@@ -6,8 +6,8 @@
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.1.0-red.svg)](https://pytorch.org/)
 [![Flask](https://img.shields.io/badge/Flask-2.0%2B-green.svg)](https://flask.palletsprojects.com/)
 [![MongoDB](https://img.shields.io/badge/MongoDB-4.3%2B-green.svg)](https://www.mongodb.com/)
-[![GitHub issues](https://img.shields.io/github/issues/shyncomputer/fall_detection)](https://github.com/shyncomputer/fall_detection/issues)
-[![GitHub stars](https://img.shields.io/github/stars/shyncomputer/fall_detection)](https://github.com/shyncomputer/fall_detection/stargazers)
+[![GitHub issues](https://img.shields.io/github/issues/shyncomputer/fall_detection)](https://github.com/let-shyn-cook/FallSense-Fall-detection-system/issues)
+[![GitHub stars](https://img.shields.io/github/stars/shyncomputer/fall_detection)](https://github.com/let-shyn-cook/FallSense-Fall-detection-system/stargazers)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 </div>
