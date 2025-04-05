@@ -1,0 +1,7 @@
+0: Fall Down
+1: Lying Down
+2: Sit down
+3: Sitting
+4: Stand up
+5: Standing
+6: Walking

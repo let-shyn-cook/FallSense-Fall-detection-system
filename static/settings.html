@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cài đặt - FallSense</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/settings.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">FallSense</div>
+        <ul class="nav-menu">
+            <li class="nav-item"><a href="index.html">Trang chủ</a></li>
+            <li class="nav-item"><a href="monitor.html">Theo dõi</a></li>
+            <li class="nav-item"><a href="history.html">Lịch sử</a></li>
+            <li class="nav-item active"><a href="settings.html">Cài đặt</a></li>
+        </ul>
+    </nav>
+
+    <main class="settings-section">
+        <div class="settings-container fade-in">
+            <h1 class="settings-title">Cài đặt hệ thống</h1>
+
+            <div class="settings-grid">
+                <div class="settings-card">
+                    <h2>Cài đặt camera</h2>
+                    <div class="settings-content">
+                        <div class="setting-item">
+                            <label for="cameraSelect">Chọn camera:</label>
+                            <select id="cameraSelect" class="setting-input">
+                                <option value="0">Camera mặc định</option>
+                            </select>
+                        </div>
+                        <div class="setting-item">
+                            <label for="resolution">Độ phân giải:</label>
+                            <select id="resolution" class="setting-input">
+                                <option value="720p">HD (720p)</option>
+                                <option value="1080p">Full HD (1080p)</option>
+                                <option value="480p">SD (480p)</option>
+                            </select>
+                        </div>
+                        <div class="setting-item">
+                            <label for="frameRate">Tốc độ khung hình:</label>
+                            <select id="frameRate" class="setting-input">
+                                <option value="30">30 FPS</option>
+                                <option value="24">24 FPS</option>
+                                <option value="15">15 FPS</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="settings-card">
+                    <h2>Cài đặt phát hiện</h2>
+                    <div class="settings-content">
+                        <div class="setting-item">
+                            <label for="detectionThreshold">Ngưỡng phát hiện té ngã:</label>
+                            <div class="range-container">
+                                <input type="range" id="detectionThreshold" min="1" max="10" value="5" class="setting-range">
+                                <span class="range-value">5</span>
+                            </div>
+                        </div>
+                        <div class="setting-item">
+                            <label for="detectionDelay">Độ trễ xác nhận (giây):</label>
+                            <div class="range-container">
+                                <input type="range" id="detectionDelay" min="1" max="5" value="2" class="setting-range">
+                                <span class="range-value">2</span>
+                            </div>
+                        </div>
+                        <div class="setting-item">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="enableMotionDetection" checked>
+                                <span class="checkbox-custom"></span>
+                                Bật phát hiện chuyển động
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="settings-card">
+                    <h2>Cài đặt thông báo</h2>
+                    <div class="settings-content">
+                        <div class="setting-item">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="enableAlertSound" checked>
+                                <span class="checkbox-custom"></span>
+                                Bật âm thanh cảnh báo
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="enableScreenAlert" checked>
+                                <span class="checkbox-custom"></span>
+                                Hiển thị cảnh báo trên màn hình
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <label for="alertVolume">Âm lượng cảnh báo:</label>
+                            <div class="range-container">
+                                <input type="range" id="alertVolume" min="0" max="100" value="80" class="setting-range">
+                                <span class="range-value">80%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="settings-card">
+                    <h2>Cài đặt lưu trữ</h2>
+                    <div class="settings-content">
+                        <div class="setting-item">
+                            <label for="storageLimit">Giới hạn lưu trữ:</label>
+                            <select id="storageLimit" class="setting-input">
+                                <option value="7">7 ngày</option>
+                                <option value="14">14 ngày</option>
+                                <option value="30">30 ngày</option>
+                                <option value="90">90 ngày</option>
+                            </select>
+                        </div>
+                        <div class="setting-item">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="autoDeleteOld" checked>
+                                <span class="checkbox-custom"></span>
+                                Tự động xóa dữ liệu cũ
+                            </label>
+                        </div>
+                        <div class="storage-info">
+                            <div class="storage-bar">
+                                <div class="storage-used" style="width: 45%;"></div>
+                            </div>
+                            <p>Đã sử dụng: <span id="storageUsed">450MB</span> / <span id="storageTotal">1GB</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-actions">
+                <button id="saveSettings" class="btn btn-primary">Lưu cài đặt</button>
+                <button id="resetSettings" class="btn btn-secondary">Khôi phục mặc định</button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 FallSense. Hệ thống phát hiện té ngã thông minh.</p>
+        </div>
+    </footer>
+
+    <div id="saveNotification" class="notification">
+        <span class="notification-icon">✓</span>
+        <span class="notification-text">Đã lưu cài đặt thành công!</span>
+    </div>
+
+    <script src="js/settings.js"></script>
+</body>
+</html>

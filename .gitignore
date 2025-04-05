@@ -1,0 +1,41 @@
+# Python cache files
+__pycache__/
+*.py[cod]
+
+# Model files
+*.pt
+*.engine
+*.onnx
+
+# Training data
+data_action/
+
+# Pickle files
+*.pkl
+
+# Video files
+*.mp4
+*.avi
+*.mov
+
+# Image files from fall detection
+static/fall_images/
+
+# Video files from fall detection
+static/fall_videos/
+
+# MongoDB data
+fall_events.json
+
+# Training logs and checkpoints
+runs/
+
+# Jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# Environment files
+.env
+
+# System files
+.DS_Store
+Thumbs.db

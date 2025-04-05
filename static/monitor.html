@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theo dõi - FallSense</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/monitor.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.min.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <a href="index.html" class="logo">FallSense</a>
+        </div>
+        <ul class="navbar-nav">
+            <li><a href="index.html">Trang chủ</a></li>
+            <li><a href="monitor.html" class="active">Theo dõi</a></li>
+            <li><a href="history.html">Lịch sử</a></li>
+            <li><a href="settings.html">Cài đặt</a></li>
+        </ul>
+    </nav>
+
+    <section class="monitor-section">
+        <div class="monitor-grid">
+            <!-- Phần trạng thái bên trái -->
+            <div class="status-panel">
+                <div class="status-card">
+                    <h3>Trạng thái</h3>
+                    <div class="status-indicator">
+                        <div class="status-dot"></div>
+                        <span id="statusText">Đang theo dõi</span>
+                    </div>
+                </div>
+
+                <div class="action-card">
+                    <h3>Hành động hiện tại</h3>
+                    <div class="action-display">
+                        <span id="actionText">Đang chờ...</span>
+                    </div>
+                </div>
+
+                <div class="alert-card">
+                    <h3>Cảnh báo</h3>
+                    <div class="alert-message">
+                        <span id="alertIcon">✓</span>
+                        <span id="alertText">Phát hiện té ngã!</span>
+                    </div>
+                </div>
+
+                <div class="tracking-card">
+                    <h3>Trạng thái theo dõi</h3>
+                    <div id="trackingList" class="tracking-list">
+                        <!-- Danh sách trạng thái sẽ được thêm vào đây bởi JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video ở giữa -->
+            <div class="video-container">
+                <div class="camera-feed" id="cameraFeed">
+                    <div class="camera-placeholder">
+                        <p>Đang kết nối camera...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nút điều khiển bên phải -->
+            <div class="controls-panel">
+                <button class="btn btn-primary" id="startBtn">Bắt đầu camera</button>
+                <button class="btn btn-secondary" id="stopBtn" disabled>Dừng camera</button>
+                <button class="btn btn-secondary" id="fullscreenBtn">Toàn màn hình</button>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>© 2024 FallSense. Hệ thống phát hiện té ngã thông minh.</p>
+    </footer>
+
+    <script src="js/monitor.js"></script>
+</body>
+</html>

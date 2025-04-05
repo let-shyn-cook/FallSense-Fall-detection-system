@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lịch sử - FallGuard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/history.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.min.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">FallSense</div>
+        <ul class="nav-menu">
+            <li class="nav-item"><a href="index.html">Trang chủ</a></li>
+            <li class="nav-item"><a href="monitor.html">Theo dõi</a></li>
+            <li class="nav-item active"><a href="history.html">Lịch sử</a></li>
+            <li class="nav-item"><a href="settings.html">Cài đặt</a></li>
+        </ul>
+    </nav>
+
+    <main class="history-section">
+        <div class="history-container fade-in">
+            <div class="history-header">
+                <h1>Lịch sử phát hiện té ngã</h1>
+                <div class="filter-controls">
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="Tìm kiếm...">
+                        <button class="btn btn-primary" id="searchButton">Tìm</button>
+                    </div>
+                    <div class="date-filter">
+                        <input type="date" id="startDate">
+                        <span>đến</span>
+                        <input type="date" id="endDate">
+                    </div>
+                    <button class="btn btn-danger" id="deleteHistory">Xóa lịch sử</button>
+                </div>
+            </div>
+
+            <div class="history-content">
+                <div class="history-table-container">
+                    <table class="history-table">
+                        <thead>
+                            <tr>
+                                <th>Thời gian</th>
+                                <th>Camera</th>
+                                <th>Track ID</th>
+                                <th>Hành động</th>
+                                <th>Trạng thái</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="historyTableBody">
+                            <!-- Dữ liệu sẽ được thêm vào đây bằng JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="pagination">
+                    <button class="btn btn-secondary" id="prevPage" disabled>Trước</button>
+                    <span id="pageInfo">Trang 1 / 1</span>
+                    <button class="btn btn-secondary" id="nextPage" disabled>Sau</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal xem chi tiết -->
+        <div id="detailModal" class="modal">
+            <div class="modal-content fade-in">
+                <div class="modal-header">
+                    <h2>Chi tiết sự kiện</h2>
+                    <span class="close">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <div class="event-details">
+                        <div class="detail-item">
+                            <span class="label">Thời gian:</span>
+                            <span id="eventTime" class="value"></span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">Camera:</span>
+                            <span id="eventCamera" class="value"></span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">Track ID:</span>
+                            <span id="eventTrackId" class="value"></span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">Hành động:</span>
+                            <span id="eventAction" class="value"></span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">Trạng thái:</span>
+                            <span id="eventStatus" class="value"></span>
+                        </div>
+                    </div>
+                    <div class="event-image">
+                        <img id="eventSnapshot" src="" alt="Ảnh sự kiện">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 FallSense. Hệ thống phát hiện té ngã thông minh.</p>
+        </div>
+    </footer>
+
+    <script src="js/history.js"></script>
+</body>
+</html>
