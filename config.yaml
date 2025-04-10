@@ -1,5 +1,5 @@
-dataset-path-train: '/home/duyngu/Downloads/dataset_action_split/train_yolov7.pkl'
-dataset-path-test: '/home/duyngu/Downloads/dataset_action_split/test_yolov7.pkl'
+dataset-path-train: 'train.pkl'
+dataset-path-test: 'test.pkl'
 epochs: 50
 project: 'runs'
 batch-size: 64

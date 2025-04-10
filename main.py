@@ -90,7 +90,12 @@ def predict_action(stgcn, frames_queue, device, class_names):
     
     # Chuẩn bị dữ liệu đầu vào
     features = np.array(list(frames_queue))
-    features = features[::2]  # Lấy 15 frame
+    
+    # Lấy mẫu để có 15 frame đều đặn từ toàn bộ video
+    if len(features) > 15:
+        indices = np.linspace(0, len(features)-1, 15, dtype=int)
+        features = features[indices]
+    
     # Reshape và chuẩn hóa dữ liệu keypoints
     keypoints_data = features[:, :, :2].reshape(features.shape[0], features.shape[1], 2)
     features[:, :, :2] = processing_data(keypoints_data).reshape(features.shape[0], features.shape[1], 2)
