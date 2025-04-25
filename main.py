@@ -5,6 +5,7 @@ from ultralytics import YOLO
 from models.stgcn import TwoStreamSpatialTemporalGraph
 from dataloader.dataset import processing_data
 from collections import deque
+import time
 
 class FallDetectionSystem:
     def __init__(self, prob_threshold=5):
@@ -120,7 +121,7 @@ def main():
     fall_system = FallDetectionSystem()
     
     # Khởi tạo camera
-    cap = cv2.VideoCapture('videoplayback.mp4')
+    cap = cv2.VideoCapture('0405.mp4')
     if not cap.isOpened():
         print("Error: Could not open camera")
         return
@@ -128,16 +129,30 @@ def main():
     # Dictionary để lưu trữ frames cho từng người
     frames_queues = {}
     
+    # Biến để tính FPS
+    prev_time = time.time()
+    fps = 0
+    
     while True:
         ret, frame = cap.read()
         if not ret:
             break
             
+        # Tính FPS
+        current_time = time.time()
+        fps = 1 / (current_time - prev_time)
+        prev_time = current_time
+            
         # Phát hiện pose với YOLO và tracking
-        results = yolo.track(frame, persist=True, conf=0.5, tracker="bytetrack.yaml")
+        results = yolo.track(frame, persist=True, conf=0.5, tracker="bytetrack.yaml", verbose=False)
         
         # Xử lý keypoints
         keypoints_list, track_ids = process_keypoints(results)
+        
+        # Hiển thị FPS
+        cv2.putText(frame, f"FPS: {int(fps)}", (10, 60),
+                    cv2.FONT_HERSHEY_SIMPLEX, 2.0, (0, 255, 0), 3)
+        
         if keypoints_list is not None:
             for i, (keypoints, track_id) in enumerate(zip(keypoints_list, track_ids)):
                 # Khởi tạo queue cho người mới
@@ -185,8 +200,13 @@ def main():
                         pt2 = (int(keypoints_2d[pair[1]][0]), int(keypoints_2d[pair[1]][1]))
                         cv2.line(frame, pt1, pt2, (0, 255, 0), 2)
         
+        # Resize frame để hiển thị
+        display_width = 1280  # Chiều rộng mong muốn
+        display_height = int(frame.shape[0] * (display_width / frame.shape[1]))  # Tính chiều cao tỷ lệ
+        display_frame = cv2.resize(frame, (display_width, display_height))
+        
         # Hiển thị frame
-        cv2.imshow('Fall Detection', frame)
+        cv2.imshow('Fall Detection', display_frame)
         
         # Thoát khi nhấn 'q'
         if cv2.waitKey(1) & 0xFF == ord('q'):
