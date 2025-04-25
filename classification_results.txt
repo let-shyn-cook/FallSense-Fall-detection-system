@@ -1,0 +1,26 @@
+Classification Report:
+------------------------------------------------------------
+              precision    recall  f1-score   support
+
+   Fall Down       1.00      1.00      1.00        10
+  Lying Down       1.00      0.90      0.95        10
+    Sit down       1.00      0.80      0.89        10
+     Sitting       0.83      1.00      0.91        10
+    Stand up       1.00      1.00      1.00        10
+    Standing       0.55      0.60      0.57        10
+     Walking       0.60      0.60      0.60        10
+
+    accuracy                           0.84        70
+   macro avg       0.85      0.84      0.85        70
+weighted avg       0.85      0.84      0.85        70
+
+
+Detailed Results:
+------------------------------------------------------------
+Fall Down: 10/10 correct (100.00% accuracy)
+Lying Down: 9/10 correct (90.00% accuracy)
+Sit down: 8/10 correct (80.00% accuracy)
+Sitting: 10/10 correct (100.00% accuracy)
+Stand up: 10/10 correct (100.00% accuracy)
+Standing: 6/10 correct (60.00% accuracy)
+Walking: 6/10 correct (60.00% accuracy)
