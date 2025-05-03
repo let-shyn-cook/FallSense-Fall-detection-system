@@ -37,8 +37,12 @@ def register():
         return jsonify({'message': f'Lỗi khi xử lý dữ liệu: {str(e)}'}), 400
     
     # Kiểm tra dữ liệu đầu vào
-    if not all(k in data for k in ('username', 'email', 'password')):
+    if not all(k in data for k in ('username', 'email', 'password', 'phone')):
         return jsonify({'message': 'Thiếu thông tin đăng ký'}), 400
+    
+    # Kiểm tra định dạng số điện thoại
+    if not data['phone'].isdigit() or len(data['phone']) != 10:
+        return jsonify({'message': 'Số điện thoại không hợp lệ'}), 400
     
     # Kiểm tra username đã tồn tại
     if users_collection.find_one({'username': data['username']}):
@@ -48,10 +52,15 @@ def register():
     if users_collection.find_one({'email': data['email']}):
         return jsonify({'message': 'Email đã tồn tại'}), 400
     
+    # Kiểm tra số điện thoại đã tồn tại
+    if users_collection.find_one({'phone': data['phone']}):
+        return jsonify({'message': 'Số điện thoại đã tồn tại'}), 400
+    
     # Tạo user mới
     new_user = {
         'username': data['username'],
         'email': data['email'],
+        'phone': data['phone'],
         'password': generate_password_hash(data['password']),
         'created_at': datetime.utcnow()
     }

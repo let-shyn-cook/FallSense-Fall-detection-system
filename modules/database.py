@@ -41,16 +41,6 @@ class Database:
                 if not self.connect_mongodb():
                     print("Không thể kết nối MongoDB, chỉ lưu vào file JSON")
             
-            # Kiểm tra xem track_id đã tồn tại chưa và reset_flag=False
-            if self.fall_events is not None:
-                existing_event = self.fall_events.find_one({
-                    'track_id': event['track_id'],
-                    'reset_flag': False
-                })
-                if existing_event:
-                    print(f"Track ID {event['track_id']} đã được lưu trước đó")
-                    return
-            
             # Thêm trạng thái té ngã, timestamp và reset_flag
             event['fall_detected'] = True
             event['timestamp'] = datetime.now().isoformat()
@@ -79,16 +69,12 @@ class Database:
                         except Exception as retry_error:
                             print(f"Vẫn không thể lưu vào MongoDB sau khi thử kết nối lại: {str(retry_error)}")
 
-            
             # Lưu vào file JSON để tương thích ngược
             try:
                 events = []
                 if os.path.exists('fall_events.json'):
                     with open('fall_events.json', 'r', encoding='utf-8') as f:
                         events = json.load(f)
-                        # Kiểm tra xem track_id đã tồn tại trong file JSON chưa
-                        if any(e.get('track_id') == event['track_id'] for e in events):
-                            return
                 events.append(event)
                 with open('fall_events.json', 'w', encoding='utf-8') as f:
                     json.dump(events, f, ensure_ascii=False, indent=2)

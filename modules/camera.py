@@ -11,6 +11,8 @@ from datetime import datetime
 import os
 import json
 from dotenv import load_dotenv
+from queue import Queue
+from modules.database import Database
 
 # Load biến môi trường từ file .env
 load_dotenv()
@@ -26,6 +28,11 @@ class VideoCamera:
         self.current_actions = {}
         self.fall_detected = {}
         self.socketio = socketio
+        
+        # Thêm queue và worker thread cho việc lưu dữ liệu
+        self.fall_event_queue = Queue()
+        self.db_worker = threading.Thread(target=self._save_fall_event_worker, daemon=True)
+        self.db_worker.start()
         
         # Biến theo dõi ghi video
         self.recording = {}
@@ -116,6 +123,10 @@ class VideoCamera:
         # Dừng tất cả video writers
         for track_id in list(self.video_writers.keys()):
             self.stop_recording(track_id)
+            
+        # Dừng worker thread
+        self.fall_event_queue.put(None)  # Signal để dừng worker
+        self.db_worker.join()  # Đợi worker thread kết thúc
             
         return True
     
@@ -267,94 +278,48 @@ class VideoCamera:
         return frame
     
     def save_fall_event(self, track_id, frame):
-        # Kiểm tra xem track_id đã tồn tại trong current_actions và chưa được xử lý trong phiên hiện tại
+        # Kiểm tra điều kiện
         if track_id not in self.current_actions:
             print(f"Warning: track_id {track_id} không tồn tại trong current_actions")
             return
             
+        # Kiểm tra xem track_id đã được xử lý trong phiên hiện tại chưa
         if track_id in self.processed_track_ids:
             return
             
         # Đánh dấu track_id đã được xử lý
         self.processed_track_ids.add(track_id)
 
-        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+        timestamp = datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
         
-        # Lưu frame hiện tại thành ảnh
-        image_filename = f'static/fall_images/{timestamp}.jpg'
-        image_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), image_filename)
-        
-        # Convert frame to uint8 if needed
-        frame_to_save = frame
-        if isinstance(frame_to_save, np.ndarray):
-            if frame_to_save.dtype != np.uint8:
-                frame_to_save = (frame_to_save * 255).astype(np.uint8)
-        
-        cv2.imwrite(image_path, frame_to_save)
-        
-        # Xử lý ghi video
-        if track_id not in self.recording:
-            # Bắt đầu ghi video mới
-            self.recording[track_id] = True
-            self.fall_start_frames[track_id] = []
-            self.fall_frame_count[track_id] = 0
-            
-            # Khởi tạo video writer với các codec khác nhau
-            video_filename = f'static/fall_videos/{timestamp}.mp4'
-            height, width = frame.shape[:2]
-            
-            # Danh sách các codec để thử
-            codecs = ['avc1', 'h264', 'mp4v', 'divx', 'xvid']
-            success = False
-            
-            for codec in codecs:
-                try:
-                    fourcc = cv2.VideoWriter_fourcc(*codec)
-                    writer = cv2.VideoWriter(video_filename, fourcc, 30.0, (width, height))
-                    
-                    if writer is not None and writer.isOpened():
-                        self.video_writers[track_id] = writer
-                        print(f"Đã khởi tạo VideoWriter thành công với codec {codec}")
-                        success = True
-                        break
-                except Exception as e:
-                    print(f"Không thể khởi tạo VideoWriter với codec {codec}: {str(e)}")
-                    if writer is not None:
-                        writer.release()
-            
-            if not success:
-                print(f"Không thể tạo video writer cho {video_filename} với tất cả các codec đã thử")
-                return
-        
-        # Lưu frame vào video
-        if self.recording[track_id]:
-            self.video_writers[track_id].write(frame_to_save)
-            self.fall_start_frames[track_id].append(frame_to_save)
-            self.fall_frame_count[track_id] += 1
-            
-            # Nếu đã ghi đủ 90 frames (3 giây), dừng ghi
-            if self.fall_frame_count[track_id] >= 90:
-                self.stop_recording(track_id)
-        
+        # Tạo event data với timestamp duy nhất
         event = {
-            'timestamp': datetime.now().isoformat(),
+            'timestamp': timestamp,
             'camera': 'Camera 1',
             'track_id': track_id,
             'action': self.current_actions[track_id],
             'fall_detected': True,
-            'snapshot_url': f'/{image_filename}',
-            'video_url': f'/static/fall_videos/{timestamp}.mp4' if track_id in self.video_writers else None,
+            'snapshot_url': f'/static/fall_images/{timestamp.replace(":", "_")}_{track_id}.jpg',
+            'video_url': f'/static/fall_videos/{timestamp.replace(":", "_")}_{track_id}.mp4',
             'location': 'Camera 1',
-            'status': 'Detected'
+            'status': 'Detected',
+            'frame': frame.copy()  # Thêm frame vào event data
         }
         
-        try:
-            # Lưu vào MongoDB và file JSON thông qua Database class
-            from modules.database import Database
-            db = Database()
-            db.save_fall_event(event)
-        except Exception as e:
-            print(f"Lỗi khi lưu sự kiện té ngã: {str(e)}")
+        # Thêm video frame nếu đang ghi
+        if track_id in self.recording and self.recording[track_id]:
+            event['video_frame'] = frame.copy()
+        
+        # Đẩy event vào queue để xử lý async
+        self.fall_event_queue.put(event)
+        
+        # Gửi thông báo real-time về sự kiện té ngã
+        if self.socketio:
+            self.socketio.emit('fall_detected', {
+                'track_id': track_id,
+                'timestamp': timestamp,
+                'action': self.current_actions[track_id]
+            })
     
     def get_frame(self):
         with self.lock:
@@ -387,3 +352,63 @@ class VideoCamera:
             status['people'].append(person_status)
             
         return status
+
+    def _save_fall_event_worker(self):
+        """Worker thread để xử lý việc lưu dữ liệu té ngã"""
+        db = Database()  # Khởi tạo kết nối database một lần
+        
+        while True:
+            try:
+                # Lấy event từ queue
+                event_data = self.fall_event_queue.get()
+                if event_data is None:  # Signal để dừng thread
+                    break
+                    
+                frame = event_data.pop('frame')  # Lấy frame ra khỏi event data
+                timestamp = event_data['timestamp']
+                track_id = event_data['track_id']
+                
+                # Lưu ảnh với timestamp duy nhất
+                image_filename = f'static/fall_images/{timestamp.replace(":", "_")}_{track_id}.jpg'
+                image_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), image_filename)
+                cv2.imwrite(image_path, frame)
+                
+                # Lưu video nếu cần
+                if 'video_frame' in event_data:
+                    video_frame = event_data.pop('video_frame')
+                    video_filename = f'static/fall_videos/{timestamp.replace(":", "_")}_{track_id}.mp4'
+                    height, width = video_frame.shape[:2]
+                    
+                    # Thử các codec khác nhau
+                    codecs = ['avc1', 'h264', 'mp4v', 'divx', 'xvid']
+                    for codec in codecs:
+                        try:
+                            fourcc = cv2.VideoWriter_fourcc(*codec)
+                            writer = cv2.VideoWriter(video_filename, fourcc, 30.0, (width, height))
+                            if writer is not None and writer.isOpened():
+                                writer.write(video_frame)
+                                writer.release()
+                                break
+                        except Exception as e:
+                            if writer is not None:
+                                writer.release()
+                            continue
+                
+                # Lưu vào database
+                try:
+                    db.save_fall_event(event_data)
+                    
+                    # Gửi thông báo cập nhật real-time
+                    if self.socketio:
+                        self.socketio.emit('fall_saved', {
+                            'timestamp': timestamp,
+                            'track_id': track_id
+                        })
+                except Exception as e:
+                    print(f"Lỗi khi lưu sự kiện vào database: {str(e)}")
+                
+                self.fall_event_queue.task_done()
+                
+            except Exception as e:
+                print(f"Lỗi trong worker thread: {str(e)}")
+                continue
