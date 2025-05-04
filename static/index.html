@@ -3,58 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hệ Thống Phát Hiện Té Ngã</title>
+    <title>Bảng điều khiển - FallSense</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.min.js"></script>
 </head>
 <body>
     <nav class="navbar">
         <div class="nav-brand">FallSense</div>
         <ul class="nav-menu">
-            <li class="nav-item active"><a href="index.html">Trang chủ</a></li>
+            <li class="nav-item active"><a href="index.html">Bảng điều khiển</a></li>
             <li class="nav-item"><a href="monitor.html">Theo dõi</a></li>
             <li class="nav-item"><a href="history.html">Lịch sử</a></li>
             <li class="nav-item"><a href="settings.html">Cài đặt</a></li>
         </ul>
     </nav>
 
-    <main class="hero-section">
-        <div class="hero-content fade-in">
-            <h1 class="slide-in-left">Hệ Thống Phát Hiện Té Ngã Thông Minh</h1>
-            <p class="slide-in-right">Giám sát an toàn 24/7 với công nghệ AI tiên tiến</p>
-            <p class="description slide-in-right">FallSense là hệ thống phát hiện té ngã thông minh sử dụng trí tuệ nhân tạo, được thiết kế để theo dõi và phát hiện các trường hợp té ngã trong thời gian thực.</p>
-            <div class="cta-buttons">
-                <a href="monitor.html" class="btn btn-primary pulse">Bắt đầu theo dõi</a>
-                <a href="#features" class="btn btn-secondary">Tìm hiểu thêm</a>
+    <main class="dashboard-section">
+        <div class="dashboard-container">
+            <!-- Summary Cards -->
+            <div class="summary-cards">
+                <div class="summary-card">
+                    <h3>Tổng số lần té ngã</h3>
+                    <p id="totalFalls">0</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Té ngã hôm nay</h3>
+                    <p id="todayFalls">0</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Camera đang hoạt động</h3>
+                    <p id="activeCameras">0</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Tổng số camera</h3>
+                    <p id="totalCameras">0</p>
+                </div>
+            </div>
+
+            <!-- Charts Section -->
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <h3>Thống kê té ngã theo thời gian</h3>
+                    <canvas id="timelineChart"></canvas>
+                </div>
+                <div class="chart-card">
+                    <h3>Phân bố té ngã theo camera</h3>
+                    <canvas id="cameraDistributionChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Recent Events Section -->
+            <div class="recent-events">
+                <h3>Sự kiện gần đây</h3>
+                <div class="events-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Thời gian</th>
+                                <th>Camera</th>
+                                <th>Trạng thái</th>
+                                <th>Hành động</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recentEventsBody">
+                            <!-- Events will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </main>
-
-    <section id="features" class="features-section">
-        <h2 class="section-title">Tính năng nổi bật</h2>
-        <div class="features-grid">
-            <div class="feature-card fade-in">
-                <div class="feature-icon">🎥</div>
-                <h3>Theo dõi thời gian thực</h3>
-                <p>Giám sát liên tục với độ trễ thấp</p>
-            </div>
-            <div class="feature-card fade-in">
-                <div class="feature-icon">🤖</div>
-                <h3>AI Thông minh</h3>
-                <p>Phát hiện té ngã chính xác với AI</p>
-            </div>
-            <div class="feature-card fade-in">
-                <div class="feature-icon">⚡</div>
-                <h3>Cảnh báo tức thì</h3>
-                <p>Thông báo ngay khi phát hiện sự cố</p>
-            </div>
-            <div class="feature-card fade-in">
-                <div class="feature-icon">📊</div>
-                <h3>Thống kê chi tiết</h3>
-                <p>Báo cáo và phân tích dữ liệu</p>
-            </div>
-        </div>
-    </section>
 
     <footer class="footer">
         <div class="footer-content">
@@ -62,7 +82,6 @@
         </div>
     </footer>
 
-    <script src="js/animations.js"></script>
-    <script src="js/main.js"></script>
+    <script src="js/dashboard.js"></script>
 </body>
 </html>

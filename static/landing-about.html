@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Về chúng tôi - FallSense</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/landing.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* About page specific styles */
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+        
+        .about-section {
+            margin-bottom: 5rem;
+        }
+        
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .about-image {
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .about-content h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+        }
+        
+        .about-content p {
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+            color: var(--secondary-color);
+        }
+        
+        .mission-values {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .mission-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .mission-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .mission-icon {
+            width: 70px;
+            height: 70px;
+            background-color: rgba(37, 99, 235, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .mission-icon i {
+            font-size: 2rem;
+            color: var(--primary-color);
+        }
+        
+        .mission-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+        
+        .mission-card p {
+            color: var(--secondary-color);
+            line-height: 1.6;
+        }
+        
+        .team-section {
+            text-align: center;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .team-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .team-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .team-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .team-info {
+            padding: 1.5rem;
+        }
+        
+        .team-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+        
+        .team-info p {
+            color: var(--primary-color);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        
+        .team-social {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .team-social a {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background-color: rgba(37, 99, 235, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            transition: all 0.3s ease;
+        }
+        
+        .team-social a:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .timeline-section {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding-top: 3rem;
+        }
+        
+        .timeline-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background-color: #e2e8f0;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            width: 50%;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            padding-right: 3rem;
+            text-align: right;
+        }
+        
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            padding-left: 3rem;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-dot {
+            right: -10px;
+        }
+        
+        .timeline-item:nth-child(even) .timeline-dot {
+            left: -10px;
+        }
+        
+        .timeline-date {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .timeline-content {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .timeline-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+        
+        .timeline-content p {
+            color: var(--secondary-color);
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 992px) {
+            .mission-values, .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline-section::before {
+                left: 30px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 80px;
+                padding-right: 0;
+                text-align: left;
+            }
+            
+            .timeline-item:nth-child(odd) {
+                left: 0;
+                padding-right: 0;
+                text-align: left;
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+            
+            .timeline-item:nth-child(odd) .timeline-dot {
+                left: 20px;
+                right: auto;
+            }
+            
+            .timeline-item:nth-child(even) .timeline-dot {
+                left: 20px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .mission-values, .team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="landing-header">
+        <nav class="landing-nav">
+            <div class="logo">
+                <img src="images/fallsense-logo.svg" alt="FallSense Logo">
+                FallSense
+            </div>
+            <ul class="nav-links">
+                <li><a href="landing.html">Trang chủ</a></li>
+                <li><a href="landing-technology.html">Công nghệ</a></li>
+                <li><a href="landing-pricing.html">Bảng giá</a></li>
+                <li><a href="landing-docs.html">Tài liệu</a></li>
+                <li><a href="landing-blog.html">Blog</a></li>
+                <li><a href="landing-contact.html">Liên hệ</a></li>
+            </ul>
+            <a href="login.html" class="try-now-btn">Thử ngay</a>
+        </nav>
+    </header>
+
+    <section class="hero" style="min-height: 50vh;">
+        <div class="hero-content">
+            <h1 class="slide-in-left">Về chúng tôi</h1>
+            <p class="fade-in">Khám phá câu chuyện, sứ mệnh và đội ngũ đằng sau hệ thống phát hiện té ngã FallSense.</p>
+        </div>
+        <div class="hero-image slide-in-right">
+            <img src="images/about-hero.svg" alt="About Our Team">
+        </div>
+    </section>
+
+    <section class="about-section" style="padding: 5rem 5%; background-color: #f8fafc;">
+        <div class="about-container">
+            <div class="about-grid">
+                <div class="about-image fade-in">
+                    <img src="https://via.placeholder.com/600x400" alt="Về FallSense">
+                </div>
+                <div class="about-content slide-in-right">
+                    <h2>Câu chuyện của chúng tôi</h2>
+                    <p>FallSense được thành lập vào năm 2020 bởi một nhóm các chuyên gia công nghệ và y tế với sứ mệnh bảo vệ người cao tuổi và những người dễ bị tổn thương khỏi các tai nạn té ngã.</p>
+                    <p>Ý tưởng về FallSense bắt nguồn từ trải nghiệm cá nhân của người sáng lập, khi ông nội của anh bị té ngã tại nhà và phải nằm trên sàn nhiều giờ trước khi được phát hiện. Sự việc này đã thúc đẩy chúng tôi phát triển một giải pháp công nghệ có thể phát hiện té ngã và thông báo ngay lập tức cho người thân và nhân viên y tế.</p>
+                    <p>Sau nhiều năm nghiên cứu và phát triển, FallSense đã trở thành một trong những hệ thống phát hiện té ngã thông minh hàng đầu, sử dụng trí tuệ nhân tạo tiên tiến để bảo vệ hàng nghìn người trên khắp Việt Nam và khu vực Đông Nam Á.</p>
+                </div>
+            </div>
+            
+            <div class="mission-values">
+                <div class="mission-card fade-in">
+                    <div class="mission-icon">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3>Sứ mệnh</h3>
+                    <p>Bảo vệ sự an toàn và phẩm giá của người cao tuổi và những người dễ bị tổn thương thông qua công nghệ phát hiện té ngã thông minh, giúp họ sống độc lập và an tâm hơn.</p>
+                </div>
+                <div class="mission-card fade-in" style="transition-delay: 0.2s;">
+                    <div class="mission-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3>Tầm nhìn</h3>
+                    <p>Trở thành nhà cung cấp giải pháp phát hiện té ngã hàng đầu tại Việt Nam và Đông Nam Á, mang công nghệ AI tiên tiến đến với mọi gia đình có người cần được chăm sóc đặc biệt.</p>
+                </div>
+                <div class="mission-card fade-in" style="transition-delay: 0.4s;">
+                    <div class="mission-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Giá trị cốt lõi</h3>
+                    <p>Chúng tôi đề cao sự đổi mới, chính xác, bảo mật và tôn trọng. Mọi quyết định và sản phẩm của chúng tôi đều dựa trên những giá trị này để mang lại trải nghiệm tốt nhất cho khách hàng.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="team-section" style="padding: 5rem 5%; background-color: white;">
+        <div class="about-container">
+            <h2 class="section-title fade-in">Đội ngũ của chúng tôi</h2>
+            <p class="section-subtitle fade-in" style="max-width: 700px; margin: 0 auto 3rem; color: var(--secondary-color);">Gặp gỡ những con người tài năng và đam mê đằng sau FallSense, những người đang nỗ lực không ngừng để phát triển công nghệ bảo vệ người cao tuổi.</p>
+            
+            <div class="team-grid">
+                <div class="team-card fade-in">
+                    <img src="https://via.placeholder.com/300x350" alt="Nguyễn Văn A" class="team-image">
+                    <div class="team-info">
+                        <h3>Nguyễn Văn A</h3>
+                        <p>Đồng sáng lập & CEO</p>
+                        <div class="team-social">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-card fade-in" style="transition-delay: 0.2s;">
+                    <img src="https://via.placeholder.com/300x350" alt="Trần Thị B" class="team-image">
+                    <div class="team-info">
+                        <h3>Trần Thị B</h3>
+                        <p>Giám đốc Công nghệ</p>
+                        <div class="team-social">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-card fade-in" style="transition-delay: 0.4s;">
+                    <img src="https://via.placeholder.com/300x350" alt="Lê Văn C" class="team-image">
+                    <div class="team-info">
+                        <h3>Lê Văn C</h3>
+                        <p>Trưởng nhóm AI</p>
+                        <div class="team-social">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-card fade-in" style="transition-delay: 0.6s;">
+                    <img src="https://via.placeholder.com/300x350" alt="Phạm Thị D" class="team-image">
+                    <div class="team-info">
+                        <h3>Phạm Thị D</h3>
+                        <p>Giám đốc Y tế</p>
+                        <div class="team-social">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="history-section" style="padding: 5rem 5%; background-color: #f8fafc; text-align: center;">
+        <div class="about-container">
+            <h2 class="section-title fade-in">Lịch sử phát triển</h2>
+            <p class="section-subtitle fade-in" style="max-width: 700px; margin: 0 auto 3rem; color: var(--secondary-color);">Hành trình phát triển của FallSense từ ý tưởng ban đầu đến hệ thống phát hiện té ngã thông minh hàng đầu hiện nay.</p>
+            
+            <div class="timeline-section">
+                <div class="timeline-item fade-in">
+                    <div class="timeline-dot"></div>
+                    <span class="timeline-date">2020</span>
+                    <div class="timeline-content">
+                        <h3>Thành lập công ty</h3>
+                        <p>FallSense được thành lập bởi nhóm các chuyên gia công nghệ và y tế với sứ mệnh bảo vệ người cao tuổi khỏi các tai nạn té ngã.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item fade-in">
+                    <div class="timeline-dot"></div>
+                    <span class="timeline-date">2021</span>
+                    <div class="timeline-content">
+                        <h3>Ra mắt phiên bản beta</h3>
+                        <p>Phiên bản beta đầu tiên của hệ thống FallSense được triển khai thử nghiệm tại 5 viện dưỡng lão ở TP.HCM.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item fade-in">
+                    <div class="timeline-dot"></div>
+                    <span class="timeline-date">2022</span>
+                    <div class="timeline-content">
+                        <h3>Mở rộng thị trường</h3>
+                        <p>FallSense mở rộng hoạt động sang các thị trường Đông Nam Á, bắt đầu từ Singapore và Malaysia.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item fade-in">
+                    <div class="timeline-dot"></div>
+                    <span class="timeline-date">2023</span>
+                    <div class="timeline-content">
+                        <h3>Giải thưởng đổi mới công nghệ</h3>
+                        <p>FallSense nhận giải thưởng "Đổi mới công nghệ y tế xuất sắc" tại Techfest Vietnam 2023.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item fade-in">
+                    <div class="timeline-dot"></div>
+                    <span class="timeline-date">2024</span>
+                    <div class="timeline-content">
+                        <h3>Ra mắt FallSense 2.0</h3>
+                        <p>Phiên bản mới nhất với thuật toán AI cải tiến, độ chính xác phát hiện té ngã đạt trên 99% và tích hợp nhiều tính năng mới.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="cta-content fade-in">
+            <h2>Sẵn sàng bảo vệ người thân của bạn?</h2>
+            <p>Đăng ký ngay hôm nay để trải nghiệm hệ thống phát hiện té ngã thông minh.</p>
+            <a href="login.html" class="primary-btn pulse">Thử ngay</a>
+        </div>
+    </section>
+
+    <footer class="landing-footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <div class="logo">
+                <img src="images/fallsense-logo.svg" alt="FallSense Logo">
+                FallSense
+            </div>
+                <p>Hệ thống phát hiện té ngã thông minh</p>
+            </div>
+            <div class="footer-links">
+                <div class="link-group">
+                    <h3>Sản phẩm</h3>
+                    <ul>
+                        <li><a href="landing-technology.html">Công nghệ</a></li>
+                        <li><a href="landing-pricing.html">Bảng giá</a></li>
+                        <li><a href="landing-docs.html">Tài liệu</a></li>
+                    </ul>
+                </div>
+                <div class="link-group">
+                    <h3>Công ty</h3>
+                    <ul>
+                        <li><a href="landing-about.html">Về chúng tôi</a></li>
+                        <li><a href="landing-blog.html">Blog</a></li>
+                        <li><a href="landing-contact.html">Liên hệ</a></li>
+                    </ul>
+                </div>
+                <div class="link-group">
+                    <h3>Hỗ trợ</h3>
+                    <ul>
+                        <li><a href="landing-docs.html">Hướng dẫn</a></li>
+                        <li><a href="landing-contact.html">Hỗ trợ kỹ thuật</a></li>
+                        <li><a href="landing-faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 FallSense. Hệ thống phát hiện té ngã thông minh.</p>
+        </div>
+    </footer>
+
+    <script src="js/animations.js"></script>
+    <script src="js/landing.js"></script>
+</body>
+</html>

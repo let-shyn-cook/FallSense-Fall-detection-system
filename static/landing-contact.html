@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liên hệ - FallSense</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/landing.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Contact page specific styles */
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+        
+        .contact-info {
+            padding: 2rem;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .contact-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+        }
+        
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(37, 99, 235, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+        }
+        
+        .contact-icon i {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+        
+        .contact-text h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+            color: var(--text-color);
+        }
+        
+        .contact-text p {
+            color: var(--secondary-color);
+        }
+        
+        .contact-form {
+            padding: 2rem;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .contact-form h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: var(--border-radius);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .submit-btn:hover {
+            background-color: #1d4ed8;
+            transform: translateY(-2px);
+        }
+        
+        .map-container {
+            margin-top: 4rem;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            height: 400px;
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="landing-header">
+        <nav class="landing-nav">
+            <div class="logo">
+                <img src="images/fallsense-logo.svg" alt="FallSense Logo">
+                FallSense
+            </div>
+            <ul class="nav-links">
+                <li><a href="landing.html">Trang chủ</a></li>
+                <li><a href="landing-technology.html">Công nghệ</a></li>
+                <li><a href="landing-pricing.html">Bảng giá</a></li>
+                <li><a href="landing-docs.html">Tài liệu</a></li>
+                <li><a href="landing-blog.html">Blog</a></li>
+                <li><a href="landing-contact.html" class="active">Liên hệ</a></li>
+            </ul>
+            <a href="login.html" class="try-now-btn">Thử ngay</a>
+        </nav>
+    </header>
+
+    <section class="hero" style="min-height: 50vh;">
+        <div class="hero-content">
+            <h1 class="slide-in-left">Liên hệ</h1>
+            <p class="fade-in">Liên hệ với chúng tôi để được tư vấn và hỗ trợ về hệ thống phát hiện té ngã FallSense.</p>
+        </div>
+        <div class="hero-image slide-in-right">
+            <img src="images/contact-hero.svg" alt="Contact Us">
+        </div>
+    </section>
+
+    <section class="contact-section" style="padding: 5rem 5%; background-color: #f8fafc;">
+        <div class="contact-container">
+            <h2 class="section-title fade-in">Thông tin liên hệ</h2>
+            <div class="contact-grid">
+                <div class="contact-info fade-in">
+                    <h3>Liên hệ với chúng tôi</h3>
+                    <div class="contact-detail">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Địa chỉ</h4>
+                            <p>268 Lý Thường Kiệt, Phường 14, Quận 10, TP.HCM</p>
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Điện thoại</h4>
+                            <p>+84 28 3864 7256</p>
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Email</h4>
+                            <p>info@fallsense.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Giờ làm việc</h4>
+                            <p>Thứ Hai - Thứ Sáu: 8:00 - 17:00</p>
+                        </div>
+                    </div>
+                    <div class="social-links" style="margin-top: 2rem;">
+                        <h4 style="margin-bottom: 1rem;">Kết nối với chúng tôi</h4>
+                        <div style="display: flex; gap: 1rem;">
+                            <a href="#" style="color: var(--primary-color); font-size: 1.5rem;"><i class="fab fa-facebook"></i></a>
+                            <a href="#" style="color: var(--primary-color); font-size: 1.5rem;"><i class="fab fa-twitter"></i></a>
+                            <a href="#" style="color: var(--primary-color); font-size: 1.5rem;"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" style="color: var(--primary-color); font-size: 1.5rem;"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form slide-in-right">
+                    <h3>Gửi tin nhắn cho chúng tôi</h3>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Họ và tên</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Số điện thoại</label>
+                            <input type="tel" id="phone" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Chủ đề</label>
+                            <input type="text" id="subject" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Tin nhắn</label>
+                            <textarea id="message" class="form-control" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Gửi tin nhắn</button>
+                    </form>
+                </div>
+            </div>
+            <div class="map-container fade-in">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.4946681007846!2d106.65842937465815!3d10.773374089387621!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752ec3c161a3fb%3A0xef77cd47a1cc691e!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBCw6FjaCBraG9hIC0gxJDhuqFpIGjhu41jIFF14buRYyBnaWEgVFAuSENN!5e0!3m2!1svi!2s!4v1710338123456!5m2!1svi!2s" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section" style="padding: 5rem 5%; background-color: white;">
+        <div class="container" style="max-width: 800px; margin: 0 auto;">
+            <h2 class="section-title fade-in">Câu hỏi thường gặp</h2>
+            <div class="faq-list">
+                <div class="faq-item fade-in" style="margin-bottom: 1.5rem; border-radius: 8px; background-color: white; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); overflow: hidden;">
+                    <div class="faq-question" style="padding: 1.5rem; cursor: pointer; font-weight: 600; display: flex; justify-content: space-between; align-items: center;">
+                        <span>Làm thế nào để đặt lịch demo sản phẩm?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer" style="padding: 0 1.5rem; max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease;">
+                        <p>Bạn có thể đặt lịch demo sản phẩm bằng cách điền vào biểu mẫu liên hệ trên trang này hoặc gọi trực tiếp đến số điện thoại của chúng tôi. Đội ngũ hỗ trợ sẽ liên hệ lại với bạn trong vòng 24 giờ để sắp xếp lịch demo phù hợp.</p>
+                    </div>
+                </div>
+                <div class="faq-item fade-in" style="margin-bottom: 1.5rem; border-radius: 8px; background-color: white; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); overflow: hidden;">
+                    <div class="faq-question" style="padding: 1.5rem; cursor: pointer; font-weight: 600; display: flex; justify-content: space-between; align-items: center;">
+                        <span>Tôi cần hỗ trợ kỹ thuật, liên hệ như thế nào?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer" style="padding: 0 1.5rem; max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease;">
+                        <p>Đối với hỗ trợ kỹ thuật, bạn có thể gửi email đến support@fallsense.com hoặc gọi đến đường dây nóng hỗ trợ kỹ thuật 24/7 của chúng tôi theo số +84 28 3864 7257. Đội ngũ kỹ thuật sẽ hỗ trợ bạn trong thời gian sớm nhất.</p>
+                    </div>
+                </div>
+                <div class="faq-item fade-in" style="margin-bottom: 1.5rem; border-radius: 8px; background-color: white; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); overflow: hidden;">
+                    <div class="faq-question" style="padding: 1.5rem; cursor: pointer; font-weight: 600; display: flex; justify-content: space-between; align-items: center;">
+                        <span>Làm thế nào để trở thành đối tác của FallSense?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer" style="padding: 0 1.5rem; max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease;">
+                        <p>Chúng tôi luôn tìm kiếm các đối tác tiềm năng để mở rộng hệ sinh thái FallSense. Để trở thành đối tác, vui lòng gửi email đến partnership@fallsense.com với thông tin về công ty của bạn và lý do muốn hợp tác. Đội ngũ phát triển kinh doanh sẽ liên hệ lại để thảo luận chi tiết.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="cta-content fade-in">
+            <h2>Sẵn sàng bảo vệ người thân của bạn?</h2>
+            <p>Đăng ký ngay hôm nay để trải nghiệm hệ thống phát hiện té ngã thông minh.</p>
+            <a href="login.html" class="primary-btn pulse">Thử ngay</a>
+        </div>
+    </section>
+
+    <footer class="landing-footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <div class="logo">
+                <img src="images/fallsense-logo.svg" alt="FallSense Logo">
+                FallSense
+            </div>
+                <p>Hệ thống phát hiện té ngã thông minh</p>
+            </div>
+            <div class="footer-links">
+                <div class="link-group">
+                    <h3>Sản phẩm</h3>
+                    <ul>
+                        <li><a href="landing-technology.html">Công nghệ</a></li>
+                        <li><a href="landing-pricing.html">Bảng giá</a></li>
+                        <li><a href="landing-docs.html">Tài liệu</a></li>
+                    </ul>
+                </div>
+                <div class="link-group">
+                    <h3>Công ty</h3>
+                    <ul>
+                        <li><a href="landing-about.html">Về chúng tôi</a></li>
+                        <li><a href="landing-blog.html">Blog</a></li>
+                        <li><a href="landing-contact.html">Liên hệ</a></li>
+                    </ul>
+                </div>
+                <div class="link-group">
+                    <h3>Hỗ trợ</h3>
+                    <ul>
+                        <li><a href="landing-docs.html">Hướng dẫn</a></li>
+                        <li><a href="landing-contact.html">Hỗ trợ kỹ thuật</a></li>
+                        <li><a href="landing-faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 FallSense. Hệ thống phát hiện té ngã thông minh.</p>
+        </div>
+    </footer>
+
+    <script src="js/animations.js"></script>
+    <script src="js/landing.js"></script>
+    <script>
+        // FAQ accordion functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', () => {
+                    // Toggle active class on the clicked item
+                    item.classList.toggle('active');
+                    
+                    // Update styles for the answer
+                    const answer = item.querySelector('.faq-answer');
+                    if (item.classList.contains('active')) {
+                        answer.style.padding = '0 1.5rem 1.5rem';
+                        answer.style.maxHeight = '500px';
+                    } else {
+                        answer.style.padding = '0 1.5rem';
+                        answer.style.maxHeight = '0';
+                    }
+                    
+                    // Close other items
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                            const otherAnswer = otherItem.querySelector('.faq-answer');
+                            otherAnswer.style.padding = '0 1.5rem';
+                            otherAnswer.style.maxHeight = '0';
+                        }
+                    });
+                });
+            });
+            
+            // Form submission
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Cảm ơn bạn đã liên hệ với chúng tôi! Chúng tôi sẽ phản hồi trong thời gian sớm nhất.');
+                    contactForm.reset();
+                });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - FallSense</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/landing.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Blog page specific styles */
+        .blog-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+        
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .blog-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .blog-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .blog-content {
+            padding: 1.5rem;
+        }
+        
+        .blog-category {
+            display: inline-block;
+            background-color: rgba(37, 99, 235, 0.1);
+            color: var(--primary-color);
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            margin-bottom: 1rem;
+        }
+        
+        .blog-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-color);
+            line-height: 1.4;
+        }
+        
+        .blog-excerpt {
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .blog-meta {
+            display: flex;
+            align-items: center;
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+        }
+        
+        .blog-meta img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 0.8rem;
+        }
+        
+        .blog-meta span {
+            margin-right: 1rem;
+        }
+        
+        .blog-meta i {
+            margin-right: 0.3rem;
+        }
+        
+        .blog-featured {
+            grid-column: span 3;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .blog-featured .blog-image {
+            height: 100%;
+            min-height: 350px;
+        }
+        
+        .blog-featured .blog-content {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .blog-featured .blog-title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+        
+        .blog-featured .blog-excerpt {
+            margin-bottom: 2rem;
+        }
+        
+        .blog-sidebar {
+            grid-column: span 1;
+        }
+        
+        .blog-search {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+        
+        .blog-search input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border: 1px solid #e2e8f0;
+            border-radius: var(--border-radius);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .blog-search input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+        }
+        
+        .blog-search button {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--secondary-color);
+            cursor: pointer;
+        }
+        
+        .blog-categories, .blog-recent {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .blog-categories h3, .blog-recent h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.2rem;
+            color: var(--text-color);
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .category-list, .recent-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .category-list li, .recent-list li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .category-list a, .recent-list a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+        
+        .category-list a:hover, .recent-list a:hover {
+            color: var(--primary-color);
+        }
+        
+        .category-list span {
+            margin-left: auto;
+            background-color: #f1f5f9;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+        
+        .recent-list img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: var(--border-radius);
+            margin-right: 1rem;
+        }
+        
+        .recent-list .recent-content {
+            flex: 1;
+        }
+        
+        .recent-list h4 {
+            font-size: 0.95rem;
+            margin-bottom: 0.3rem;
+            line-height: 1.4;
+        }
+        
+        .recent-list .recent-date {
+            font-size: 0.8rem;
+            color: #94a3b8;
+        }
+        
+        .blog-pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 3rem;
+        }
+        
+        .pagination-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            margin: 0 0.3rem;
+            border-radius: 50%;
+            background-color: white;
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+        
+        .pagination-item:hover, .pagination-item.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        @media (max-width: 992px) {
+            .blog-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .blog-featured {
+                grid-column: span 2;
+                grid-template-columns: 1fr;
+            }
+            
+            .blog-featured .blog-image {
+                height: 300px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .blog-featured {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="landing-header">
+        <nav class="landing-nav">
+            <div class="logo">
+                <img src="images/fallsense-logo.svg" alt="FallSense Logo">
+                FallSense
+            </div>
+            <ul class="nav-links">
+                <li><a href="landing.html">Trang chủ</a></li>
+                <li><a href="landing-technology.html">Công nghệ</a></li>
+                <li><a href="landing-pricing.html">Bảng giá</a></li>
+                <li><a href="landing-docs.html">Tài liệu</a></li>
+                <li><a href="landing-blog.html" class="active">Blog</a></li>
+                <li><a href="landing-contact.html">Liên hệ</a></li>
+            </ul>
+            <a href="login.html" class="try-now-btn">Thử ngay</a>
+        </nav>
+    </header>
+
+    <section class="hero" style="min-height: 50vh;">
+        <div class="hero-content">
+            <h1 class="slide-in-left">Blog</h1>
+            <p class="fade-in">Cập nhật tin tức, nghiên cứu và thông tin mới nhất về công nghệ phát hiện té ngã.</p>
+        </div>
+        <div class="hero-image slide-in-right">
+            <img src="images/blog-hero.svg" alt="Blog Articles">
+        </div>
+    </section>
+
+    <section class="blog-section" style="padding: 5rem 5%; background-color: #f8fafc;">
+        <div class="blog-container">
+            <div class="blog-grid">
+                <article class="blog-card blog-featured fade-in">
+                    <img src="https://via.placeholder.com/800x500" alt="Công nghệ AI trong phát hiện té ngã" class="blog-image">
+                    <div class="blog-content">
+                        <span class="blog-category">Công nghệ</span>
+                        <h2 class="blog-title">Cách mạng trong phát hiện té ngã với công nghệ AI của FallSense</h2>
+                        <p class="blog-excerpt">Khám phá cách FallSense đang sử dụng trí tuệ nhân tạo tiên tiến để cách mạng hóa việc phát hiện té ngã, giúp bảo vệ người cao tuổi và những người dễ bị tổn thương khỏi các tai nạn nguy hiểm.</p>
+                        <div class="blog-meta">
+                            <img src="https://via.placeholder.com/50" alt="Tác giả">
+                            <span>Nguyễn Văn A</span>
+                            <span><i class="far fa-calendar"></i> 15/06/2024</span>
+                            <span><i class="far fa-comment"></i> 24</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <div class="blog-main-content">
+                    <article class="blog-card slide-in-left">
+                        <img src="https://via.placeholder.com/400x250" alt="Nghiên cứu về té ngã ở người cao tuổi" class="blog-image">
+                        <div class="blog-content">
+                            <span class="blog-category">Nghiên cứu</span>
+                            <h3 class="blog-title">Nghiên cứu mới về tác động của té ngã đối với sức khỏe người cao tuổi</h3>
+                            <p class="blog-excerpt">Tìm hiểu về những phát hiện mới nhất từ các nghiên cứu y khoa về tác động của té ngã đối với sức khỏe thể chất và tinh thần của người cao tuổi.</p>
+                            <div class="blog-meta">
+                                <span><i class="far fa-calendar"></i> 10/06/2024</span>
+                                <span><i class="far fa-comment"></i> 12</span>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <article class="blog-card slide-in-left">
+                        <img src="https://via.placeholder.com/400x250" alt="Hướng dẫn cài đặt FallSense" class="blog-image">
+                        <div class="blog-content">
+                            <span class="blog-category">Hướng dẫn</span>
+                            <h3 class="blog-title">Hướng dẫn chi tiết cài đặt và tối ưu hóa hệ thống FallSense</h3>
+                            <p class="blog-excerpt">Bài viết này cung cấp hướng dẫn từng bước về cách cài đặt, cấu hình và tối ưu hóa hệ thống FallSense để đạt hiệu quả cao nhất.</p>
+                            <div class="blog-meta">
+                                <span><i class="far fa-calendar"></i> 05/06/2024</span>
+                                <span><i class="far fa-comment"></i> 18</span>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <article class="blog-card slide-in-left">
+                        <img src="https://via.placeholder.com/400x250" alt="Câu chuyện khách hàng" class="blog-image">
+                        <div class="blog-content">
+                            <span class="blog-category">Câu chuyện</span>
+                            <h3 class="blog-title">Câu chuyện của gia đình Nguyễn: FallSense đã cứu sống mẹ tôi như thế nào</h3>
+                            <p class="blog-excerpt">Chia sẻ cảm động từ gia đình Nguyễn về cách hệ thống FallSense đã phát hiện kịp thời khi mẹ họ bị té ngã và giúp cứu sống bà.</p>
+                            <div class="blog-meta">
+                                <span><i class="far fa-calendar"></i> 01/06/2024</span>
+                                <span><i class="far fa-comment"></i> 32</span>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <article class="blog-card slide-in-left">
+                        <img src="https://via.placeholder.com/400x250" alt="So sánh công nghệ phát hiện té ngã" class="blog-image">
+                        <div class="blog-content">
+                            <span class="blog-category">So sánh</span>
+                            <h3 class="blog-title">So sánh các công nghệ phát hiện té ngã hiện có trên thị trường</h3>
+                            <p class="blog-excerpt">Phân tích chi tiết về ưu và nhược điểm của các công nghệ phát hiện té ngã khác nhau, giúp bạn lựa chọn giải pháp phù hợp nhất.</p>
+                            <div class="blog-meta">
+                                <span><i class="far fa-calendar"></i> 25/05/2024</span>
+                                <span><i class="far fa-comment"></i> 15</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                
+                <aside class="blog-sidebar fade-in">
+                    <div class="blog-search">
+                        <input type="text" placeholder="Tìm kiếm bài viết...">
+                        <button><i class="fas fa-search"></i></button>
+                    </div>
+                    
+                    <div class="blog-categories">
+                        <h3>Danh mục</h3>
+                        <ul class="category-list">
+                            <li><a href="#">Công nghệ <span>12</span></a></li>
+                            <li><a href="#">Nghiên cứu <span>8</span></a></li>
+                            <li><a href="#">Hướng dẫn <span>15</span></a></li>
+                            <li><a href="#">Câu chuyện <span>6</span></a></li>
+                            <li><a href="#">So sánh <span>4</span></a></li>
+                            <li><a href="#">Tin tức <span>10</span></a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="blog-recent">
+                        <h3>Bài viết gần đây</h3>
+                        <ul class="recent-list">
+                            <li>
+                                <a href="#">
+                                    <img src="https://via.placeholder.com/100" alt="Bài viết gần đây">
+                                    <div class="recent-content">
+                                        <h4>Cập nhật mới nhất về thuật toán phát hiện té ngã</h4>
+                                        <span class="recent-date">20/05/2024</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <img src="https://via.placeholder.com/100" alt="Bài viết gần đây">
+                                    <div class="recent-content">
+                                        <h4>5 cách phòng ngừa té ngã hiệu quả cho người cao tuổi</h4>
+                                        <span class="recent-date">15/05/2024</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <img src="https://via.placeholder.com/100" alt="Bài viết gần đây">
+                                    <div class="recent-content">
+                                        <h4>FallSense giành giải thưởng công nghệ y tế xuất sắc</h4>
+                                        <span class="recent-date">10/05/2024</span>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </aside>
+            </div>
+            
+            <div class="blog-pagination">
+                <a href="#" class="pagination-item"><i class="fas fa-chevron-left"></i></a>
+                <a href="#" class="pagination-item active">1</a>
+                <a href="#" class="pagination-item">2</a>
+                <a href="#" class="pagination-item">3</a>
+                <a href="#" class="pagination-item">4</a>
+                <a href="#" class="pagination-item"><i class="fas fa-chevron-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="cta-content fade-in">
+            <h2>Sẵn sàng bảo vệ người thân của bạn?</h2>
+            <p>Đăng ký ngay hôm nay để trải nghiệm hệ thống phát hiện té ngã thông minh.</p>
+            <a href="login.html" class="primary-btn pulse">Thử ngay</a>
+        </div>
+    </section>
+
+    <footer class="landing-footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <div class="logo">
+                <img src="images/fallsense-logo.svg" alt="FallSense Logo">
+                FallSense
+            </div>
+                <p>Hệ thống phát hiện té ngã thông minh</p>
+            </div>
+            <div class="footer-links">
+                <div class="link-group">
+                    <h3>Sản phẩm</h3>
+                    <ul>
+                        <li><a href="landing-technology.html">Công nghệ</a></li>
+                        <li><a href="landing-pricing.html">Bảng giá</a></li>
+                        <li><a href="landing-docs.html">Tài liệu</a></li>
+                    </ul>
+                </div>
+                <div class="link-group">
+                    <h3>Công ty</h3>
+                    <ul>
+                        <li><a href="landing-about.html">Về chúng tôi</a></li>
+                        <li><a href="landing-blog.html">Blog</a></li>
+                        <li><a href="landing-contact.html">Liên hệ</a></li>
+                    </ul>
+                </div>
+                <div class="link-group">
+                    <h3>Hỗ trợ</h3>
+                    <ul>
+                        <li><a href="landing-docs.html">Hướng dẫn</a></li>
+                        <li><a href="landing-contact.html">Hỗ trợ kỹ thuật</a></li>
+                        <li><a href="landing-faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 FallSense. Hệ thống phát hiện té ngã thông minh.</p>
+        </div>
+    </footer>
+
+    <script src="js/animations.js"></script>
+    <script src="js/landing.js"></script>
+</body>
+</html>

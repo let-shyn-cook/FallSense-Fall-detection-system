@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bảng giá - FallSense</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/landing.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Pricing specific styles */
+        .pricing-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+        
+        .pricing-plans {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .pricing-plan {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 2.5rem;
+            width: 300px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pricing-plan:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .pricing-plan.popular {
+            border: 2px solid var(--primary-color);
+            transform: scale(1.05);
+        }
+        
+        .pricing-plan.popular:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+        
+        .popular-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+            font-weight: bold;
+            border-bottom-left-radius: var(--border-radius);
+        }
+        
+        .plan-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+        
+        .plan-price {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .plan-billing {
+            color: var(--secondary-color);
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+        
+        .plan-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+        
+        .plan-features li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .plan-features li i {
+            color: var(--success-color);
+            margin-right: 0.8rem;
+        }
+        
+        .plan-features li.unavailable i {
+            color: var(--secondary-color);
+        }
+        
+        .plan-features li.unavailable {
+            color: var(--secondary-color);
+            text-decoration: line-through;
+        }
+        
+        .plan-button {
+            width: 100%;
+            text-align: center;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .primary-plan-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+        }
+        
+        .primary-plan-btn:hover {
+            background-color: #1d4ed8;
+            transform: translateY(-2px);
+        }
+        
+        .secondary-plan-btn {
+            background-color: white;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+        
+        .secondary-plan-btn:hover {
+            background-color: rgba(37, 99, 235, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .faq-section {
+            background-color: #f8fafc;
+            padding: 5rem 5%;
+        }
+        
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            margin-bottom: 1.5rem;
+            border-radius: var(--border-radius);
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: 1.5rem;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-question i {
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            max-height: 500px;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 3rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1.2rem;
+            text-align: center;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .comparison-table th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+        
+        .comparison-table tr:hover {
+            background-color: #e0f2fe;
+        }
+        
+        .check-icon {
+            color: var(--success-color);
+            font-size: 1.2rem;
+        }
+        
+        .x-icon {
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .pricing-plan {
+                width: 100%;
+                max-width: 350px;
+            }
+            
+            .pricing-plan.popular {
+                transform: scale(1);
+            }
+            
+            .pricing-plan.popular:hover {
+                transform: translateY(-10px);
+            }
+            
+            .comparison-table {
+                font-size: 0.9rem;
+            }
+            
+            .comparison-table th,
+            .comparison-table td {
+                padding: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="landing-header">
+        <nav class="landing-nav">
+            <div class="logo">
+                <img src="images/fallsense-logo.svg" alt="FallSense Logo">
+                FallSense
+            </div>
+            <ul class="nav-links">
+                <li><a href="landing.html">Trang chủ</a></li>
+                <li><a href="landing-technology.html">Công nghệ</a></li>
+                <li><a href="landing-pricing.html" class="active">Bảng giá</a></li>
+                <li><a href="landing-docs.html">Tài liệu</a></li>
+                <li><a href="landing-blog.html">Blog</a></li>
+                <li><a href="landing-contact.html">Liên hệ</a></li>
+            </ul>
+            <a href="login.html" class="try-now-btn">Thử ngay</a>
+        </nav>
+    </header>
+
+    <section class="hero" style="min-height: 80vh;">
+        <div class="hero-content">
+            <h1 class="slide-in-left">Bảng giá dịch vụ</h1>
+            <p class="fade-in">Lựa chọn gói dịch vụ phù hợp với nhu cầu của bạn.</p>
+        </div>
+        <div class="hero-image slide-in-right">
+            <img src="images/pricing-hero.svg?v=3" alt="Pricing Plans" width="800" height="400" style="max-width: 100%; height: auto;">
+        </div>
+    </section>
+
+    <section class="pricing-section" style="padding: 5rem 5%; background-color: white;">
+        <div class="pricing-container">
+            <h2 class="section-title fade-in">Gói dịch vụ</h2>
+            <div class="pricing-plans">
+                <div class="pricing-plan fade-in">
+                    <div class="plan-name">Cơ bản</div>
+                    <div class="plan-price">499.000đ</div>
+                    <div class="plan-billing">/ tháng</div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> 1 camera</li>
+                        <li><i class="fas fa-check"></i> Phát hiện té ngã cơ bản</li>
+                        <li><i class="fas fa-check"></i> Thông báo qua email</li>
+                        <li><i class="fas fa-check"></i> Lưu trữ 7 ngày</li>
+                        <li class="unavailable"><i class="fas fa-times"></i> Phân tích nâng cao</li>
+                        <li class="unavailable"><i class="fas fa-times"></i> Thông báo qua SMS</li>
+                        <li class="unavailable"><i class="fas fa-times"></i> Tích hợp thiết bị thông minh</li>
+                    </ul>
+                    <a href="login.html" class="plan-button secondary-plan-btn">Đăng ký ngay</a>
+                </div>
+                
+                <div class="pricing-plan popular fade-in">
+                    <div class="popular-badge">Phổ biến nhất</div>
+                    <div class="plan-name">Tiêu chuẩn</div>
+                    <div class="plan-price">899.000đ</div>
+                    <div class="plan-billing">/ tháng</div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> 3 camera</li>
+                        <li><i class="fas fa-check"></i> Phát hiện té ngã nâng cao</li>
+                        <li><i class="fas fa-check"></i> Thông báo qua email</li>
+                        <li><i class="fas fa-check"></i> Lưu trữ 30 ngày</li>
+                        <li><i class="fas fa-check"></i> Phân tích nâng cao</li>
+                        <li><i class="fas fa-check"></i> Thông báo qua SMS</li>
+                        <li class="unavailable"><i class="fas fa-times"></i> Tích hợp thiết bị thông minh</li>
+                    </ul>
+                    <a href="login.html" class="plan-button primary-plan-btn pulse">Đăng ký ngay</a>
+                </div>
+                
+                <div class="pricing-plan fade-in">
+                    <div class="plan-name">Doanh nghiệp</div>
+                    <div class="plan-price">1.999.000đ</div>
+                    <div class="plan-billing">/ tháng</div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> 10 camera</li>
+                        <li><i class="fas fa-check"></i> Phát hiện té ngã nâng cao</li>
+                        <li><i class="fas fa-check"></i> Thông báo qua email</li>
+                        <li><i class="fas fa-check"></i> Lưu trữ 90 ngày</li>
+                        <li><i class="fas fa-check"></i> Phân tích nâng cao</li>
+                        <li><i class="fas fa-check"></i> Thông báo qua SMS</li>
+                        <li><i class="fas fa-check"></i> Tích hợp thiết bị thông minh</li>
+                    </ul>
+                    <a href="login.html" class="plan-button secondary-plan-btn">Đăng ký ngay</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="comparison-section" style="padding: 5rem 5%; background-color: #f8fafc;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto;">
+            <h2 class="section-title fade-in">So sánh các gói dịch vụ</h2>
+            <div class="table-responsive" style="overflow-x: auto;">
+                <table class="comparison-table fade-in">
+                    <thead>
+                        <tr>
+                            <th>Tính năng</th>
+                            <th>Cơ bản</th>
+                            <th>Tiêu chuẩn</th>
+                            <th>Doanh nghiệp</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Số lượng camera</td>
+                            <td>1</td>
+                            <td>3</td>
+                            <td>10</td>
+                        </tr>
+                        <tr>
+                            <td>Thời gian lưu trữ</td>
+                            <td>7 ngày</td>
+                            <td>30 ngày</td>
+                            <td>90 ngày</td>
+                        </tr>
+                        <tr>
+                            <td>Phát hiện té ngã cơ bản</td>
+                            <td><i class="fas fa-check check-icon"></i></td>
+                            <td><i class="fas fa-check check-icon"></i></td>
+                            <td><i class="fas fa-check check-icon"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Phát hiện té ngã nâng cao</td>
+                            <td><i class="fas fa-times x-icon"></i></td>
+                            <td><i class="fas fa-check check-icon"></i></td>
+                            <td><i class="fas fa-check check-icon"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Thông báo qua email</td>
+                            <td><i class="fas fa-check check-icon"></i></td>
+                            <td><i class="fas fa-check check-icon"></i></td>
+                            <td><i class="fas fa-check check-icon"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Thông báo qua SMS</td>
+                            <td><i class="fas fa-times x-icon"></i></td>
+                            <td><i class="fas fa-check check-icon"></i></td>
+                            <td><i class="fas fa-check check-icon"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Phân tích nâng cao</td>
+                            <td><i class="fas fa-times x-icon"></i></td>
+                            <td><i class="fas fa-check check-icon"></i></td>
+                            <td><i class="fas fa-check check-icon"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Tích hợp thiết bị thông minh</td>
+                            <td><i class="fas fa-times x-icon"></i></td>
+                            <td><i class="fas fa-times x-icon"></i></td>
+                            <td><i class="fas fa-check check-icon"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Hỗ trợ kỹ thuật</td>
+                            <td>Email</td>
+                            <td>Email, Điện thoại</td>
+                            <td>Email, Điện thoại, Trực tiếp</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section">
+        <div class="faq-container">
+            <h2 class="section-title fade-in">Câu hỏi thường gặp</h2>
+            <div class="faq-list">
+                <div class="faq-item fade-in">
+                    <div class="faq-question">
+                        <span>Tôi có thể nâng cấp hoặc hạ cấp gói dịch vụ không?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Có, bạn có thể dễ dàng nâng cấp hoặc hạ cấp gói dịch vụ bất kỳ lúc nào. Thay đổi sẽ có hiệu lực vào đầu chu kỳ thanh toán tiếp theo.</p>
+                    </div>
+                </div>
+                <div class="faq-item fade-in">
+                    <div class="faq-question">
+                        <span>Tôi có thể dùng thử trước khi mua không?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Có, chúng tôi cung cấp bản dùng thử miễn phí 14 ngày cho tất cả các gói dịch vụ. Bạn có thể đăng ký và trải nghiệm đầy đủ tính năng mà không cần cung cấp thông tin thanh toán.</p>
+                    </div>
+                </div>
+                <div class="faq-item fade-in">
+                    <div class="faq-question">
+                        <span>Tôi cần loại camera nào để sử dụng dịch vụ?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>FallSense tương thích với hầu hết các camera IP, webcam USB và camera CCTV có độ phân giải từ 720p trở lên. Chúng tôi khuyến nghị sử dụng camera có góc nhìn rộng để bao quát được toàn bộ không gian cần giám sát.</p>
+                    </div>
+                </div>
+                <div class="faq-item fade-in">
+                    <div class="faq-question">
+                        <span>Dữ liệu của tôi có được bảo mật không?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Có, chúng tôi rất coi trọng vấn đề bảo mật. Tất cả dữ liệu video được mã hóa end-to-end và chỉ bạn mới có quyền truy cập. Chúng tôi tuân thủ các tiêu chuẩn bảo mật dữ liệu quốc tế và không bao giờ chia sẻ thông tin của bạn với bên thứ ba.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="cta-content fade-in">
+            <h2>Sẵn sàng bảo vệ người thân của bạn?</h2>
+            <p>Đăng ký ngay hôm nay để trải nghiệm hệ thống phát hiện té ngã thông minh.</p>
+            <a href="login.html" class="primary-btn pulse">Thử ngay</a>
+        </div>
+    </section>
+
+    <footer class="landing-footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <div class="logo">
+                <img src="images/fallsense-logo.svg" alt="FallSense Logo">
+                FallSense
+            </div>
+                <p>Hệ thống phát hiện té ngã thông minh</p>
+            </div>
+            <div class="footer-links">
+                <div class="link-group">
+                    <h3>Sản phẩm</h3>
+                    <ul>
+                        <li><a href="landing-technology.html">Công nghệ</a></li>
+                        <li><a href="landing-pricing.html">Bảng giá</a></li>
+                        <li><a href="landing-docs.html">Tài liệu</a></li>
+                    </ul>
+                </div>
+                <div class="link-group">
+                    <h3>Công ty</h3>
+                    <ul>
+                        <li><a href="landing-about.html">Về chúng tôi</a></li>
+                        <li><a href="landing-blog.html">Blog</a></li>
+                        <li><a href="landing-contact.html">Liên hệ</a></li>
+                    </ul>
+                </div>
+                <div class="link-group">
+                    <h3>Hỗ trợ</h3>
+                    <ul>
+                        <li><a href="landing-docs.html">Hướng dẫn</a></li>
+                        <li><a href="landing-contact.html">Hỗ trợ kỹ thuật</a></li>
+                        <li><a href="landing-faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 FallSense. Hệ thống phát hiện té ngã thông minh.</p>
+        </div>
+    </footer>
+
+    <script src="js/animations.js"></script>
+    <script src="js/landing.js"></script>
+    <script>
+        // FAQ accordion functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', () => {
+                    // Toggle active class on the clicked item
+                    item.classList.toggle('active');
+                    
+                    // Close other items
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

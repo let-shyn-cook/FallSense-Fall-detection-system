@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400">
+  <!-- Background -->
+  <rect width="800" height="400" fill="#f8fafc" rx="10" ry="10"/>
+  
+  <!-- Title -->
+  <text x="400" y="50" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#1e40af">Bảng Giá Dịch Vụ</text>
+  
+  <!-- Price Cards -->
+  <g transform="translate(100, 100)">
+    <!-- Basic Plan -->
+    <rect x="0" y="0" width="150" height="200" rx="10" ry="10" fill="white" stroke="#e2e8f0" stroke-width="2"/>
+    <text x="75" y="30" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#1e293b">Cơ Bản</text>
+    <text x="75" y="60" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#2563eb">499K</text>
+    <line x1="20" y1="80" x2="130" y2="80" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="75" y="110" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#64748b">1 Camera</text>
+    <text x="75" y="140" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#64748b">Phát hiện cơ bản</text>
+    <text x="75" y="170" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#64748b">Lưu trữ 7 ngày</text>
+  </g>
+  
+  <g transform="translate(325, 100)">
+    <!-- Standard Plan -->
+    <rect x="0" y="0" width="150" height="200" rx="10" ry="10" fill="white" stroke="#2563eb" stroke-width="3"/>
+    <text x="75" y="30" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#1e293b">Tiêu Chuẩn</text>
+    <text x="75" y="60" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#2563eb">899K</text>
+    <line x1="20" y1="80" x2="130" y2="80" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="75" y="110" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#64748b">3 Camera</text>
+    <text x="75" y="140" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#64748b">Phát hiện nâng cao</text>
+    <text x="75" y="170" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#64748b">Lưu trữ 30 ngày</text>
+  </g>
+  
+  <g transform="translate(550, 100)">
+    <!-- Business Plan -->
+    <rect x="0" y="0" width="150" height="200" rx="10" ry="10" fill="white" stroke="#e2e8f0" stroke-width="2"/>
+    <text x="75" y="30" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#1e293b">Doanh Nghiệp</text>
+    <text x="75" y="60" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#2563eb">1.999K</text>
+    <line x1="20" y1="80" x2="130" y2="80" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="75" y="110" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#64748b">10 Camera</text>
+    <text x="75" y="140" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#64748b">Phát hiện nâng cao</text>
+    <text x="75" y="170" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#64748b">Lưu trữ 90 ngày</text>
+  </g>
+</svg>

@@ -4,6 +4,7 @@ from flask_socketio import SocketIO
 from auth import auth_bp, token_required
 from modules.camera import VideoCamera
 from modules.database import Database
+from modules.dashboard_data import DashboardData
 import time
 import os
 
@@ -16,6 +17,7 @@ socketio = SocketIO(app, cors_allowed_origins="*")
 # Khởi tạo camera và database
 camera = VideoCamera(socketio)
 db = Database(socketio=socketio)
+dashboard_data = DashboardData()
 
 # Register authentication blueprint
 app.register_blueprint(auth_bp)
@@ -24,8 +26,28 @@ app.register_blueprint(auth_bp)
 def index():
     token = request.headers.get('Authorization')
     if not token:
-        return app.send_static_file('login.html')
+        return app.send_static_file('landing.html')
     return app.send_static_file('index.html')
+
+@app.route('/landing-technology')
+def landing_technology():
+    return app.send_static_file('landing-technology.html')
+
+@app.route('/landing-pricing')
+def landing_pricing():
+    return app.send_static_file('landing-pricing.html')
+
+@app.route('/landing-docs')
+def landing_docs():
+    return app.send_static_file('landing-docs.html')
+
+@app.route('/landing-blog')
+def landing_blog():
+    return app.send_static_file('landing-blog.html')
+
+@app.route('/landing-contact')
+def landing_contact():
+    return app.send_static_file('landing-contact.html')
 
 @app.route('/monitor')
 @token_required
@@ -75,6 +97,16 @@ def handle_get_settings():
     }
     socketio.emit('settings_update', settings)
 
+@socketio.on('get_dashboard_data')
+def handle_dashboard_data():
+    data = dashboard_data.get_dashboard_data()
+    socketio.emit('dashboard_data', data)
+
+@socketio.on('fall_event')
+def handle_fall_event(data):
+    # Update dashboard data when a fall event occurs
+    socketio.emit('dashboard_data', dashboard_data.get_dashboard_data())
+
 @app.route('/api/camera/start', methods=['POST'])
 def start_camera():
     success = camera.start()
@@ -113,4 +145,4 @@ def serve_fall_image(filename):
     return send_from_directory(os.path.join(app.static_folder, 'fall_images'), filename)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, threaded=True)
+    socketio.run(app, debug=True, host='0.0.0.0', port=5000)

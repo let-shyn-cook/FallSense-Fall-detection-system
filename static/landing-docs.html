@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tài liệu - FallSense</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/landing.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Documentation page specific styles */
+        .docs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+        
+        .docs-grid {
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .docs-sidebar {
+            position: sticky;
+            top: 2rem;
+            height: fit-content;
+            padding: 1.5rem;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .docs-sidebar h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .docs-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .docs-menu li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .docs-menu a {
+            display: block;
+            padding: 0.5rem 0;
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+        }
+        
+        .docs-menu a:hover, .docs-menu a.active {
+            color: var(--primary-color);
+            background-color: rgba(37, 99, 235, 0.05);
+            padding-left: 0.5rem;
+        }
+        
+        .docs-menu .submenu {
+            list-style: none;
+            padding-left: 1rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+        
+        .docs-menu .has-submenu.active .submenu {
+            display: block;
+        }
+        
+        .docs-content {
+            padding: 2rem;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .docs-section {
+            margin-bottom: 3rem;
+        }
+        
+        .docs-section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .docs-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .docs-section h3 {
+            font-size: 1.4rem;
+            margin: 1.5rem 0 1rem;
+            color: var(--text-color);
+        }
+        
+        .docs-section p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        
+        .docs-section ul, .docs-section ol {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+        }
+        
+        .docs-section li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .docs-section code {
+            background-color: #f1f5f9;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+        
+        .docs-section pre {
+            background-color: #1e293b;
+            color: #f8fafc;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+        }
+        
+        .docs-section pre code {
+            background-color: transparent;
+            color: inherit;
+            padding: 0;
+        }
+        
+        .docs-section .note {
+            background-color: #eff6ff;
+            border-left: 4px solid var(--primary-color);
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+        
+        .docs-section .warning {
+            background-color: #fff7ed;
+            border-left: 4px solid #f97316;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+        
+        .docs-section img {
+            max-width: 100%;
+            border-radius: var(--border-radius);
+            margin-bottom: 1.5rem;
+        }
+        
+        .docs-section table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5rem;
+        }
+        
+        .docs-section th, .docs-section td {
+            padding: 0.75rem;
+            border: 1px solid #e2e8f0;
+            text-align: left;
+        }
+        
+        .docs-section th {
+            background-color: #f8fafc;
+            font-weight: 600;
+        }
+        
+        @media (max-width: 768px) {
+            .docs-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .docs-sidebar {
+                position: static;
+                margin-bottom: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="landing-header">
+        <nav class="landing-nav">
+            <div class="logo">
+                <img src="images/fallsense-logo.svg" alt="FallSense Logo">
+                FallSense
+            </div>
+            <ul class="nav-links">
+                <li><a href="landing.html">Trang chủ</a></li>
+                <li><a href="landing-technology.html">Công nghệ</a></li>
+                <li><a href="landing-pricing.html">Bảng giá</a></li>
+                <li><a href="landing-docs.html" class="active">Tài liệu</a></li>
+                <li><a href="landing-blog.html">Blog</a></li>
+                <li><a href="landing-contact.html">Liên hệ</a></li>
+            </ul>
+            <a href="login.html" class="try-now-btn">Thử ngay</a>
+        </nav>
+    </header>
+
+    <section class="hero" style="min-height: 50vh;">
+        <div class="hero-content">
+            <h1 class="slide-in-left">Tài liệu</h1>
+            <p class="fade-in">Hướng dẫn chi tiết về cách cài đặt, sử dụng và tối ưu hóa hệ thống phát hiện té ngã FallSense.</p>
+        </div>
+        <div class="hero-image slide-in-right">
+            <img src="images/docs-hero.svg" alt="Documentation">
+        </div>
+    </section>
+
+    <section class="docs-section" style="padding: 5rem 5%; background-color: #f8fafc;">
+        <div class="docs-container">
+            <div class="docs-grid">
+                <div class="docs-sidebar fade-in">
+                    <h3>Danh mục</h3>
+                    <ul class="docs-menu">
+                        <li><a href="#getting-started" class="active">Bắt đầu</a></li>
+                        <li class="has-submenu">
+                            <a href="#installation">Cài đặt</a>
+                            <ul class="submenu">
+                                <li><a href="#system-requirements">Yêu cầu hệ thống</a></li>
+                                <li><a href="#setup-guide">Hướng dẫn cài đặt</a></li>
+                            </ul>
+                        </li>
+                        <li class="has-submenu">
+                            <a href="#user-guide">Hướng dẫn sử dụng</a>
+                            <ul class="submenu">
+                                <li><a href="#dashboard">Bảng điều khiển</a></li>
+                                <li><a href="#alerts">Cảnh báo</a></li>
+                                <li><a href="#reports">Báo cáo</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#api-reference">Tài liệu API</a></li>
+                        <li><a href="#troubleshooting">Xử lý sự cố</a></li>
+                        <li><a href="#faq">Câu hỏi thường gặp</a></li>
+                    </ul>
+                </div>
+                <div class="docs-content slide-in-right">
+                    <div class="docs-section" id="getting-started">
+                        <h2>Bắt đầu với FallSense</h2>
+                        <p>FallSense là hệ thống phát hiện té ngã thông minh sử dụng trí tuệ nhân tạo để giám sát và phát hiện các trường hợp té ngã, đặc biệt hữu ích cho người cao tuổi và những người cần được chăm sóc đặc biệt.</p>
+                        <p>Tài liệu này sẽ hướng dẫn bạn cách cài đặt, cấu hình và sử dụng hệ thống FallSense một cách hiệu quả nhất.</p>
+                        <div class="note">
+                            <p><strong>Lưu ý:</strong> Đảm bảo bạn đã đọc kỹ các yêu cầu hệ thống trước khi bắt đầu cài đặt.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="docs-section" id="installation">
+                        <h2>Cài đặt</h2>
+                        <p>Phần này sẽ hướng dẫn bạn cách cài đặt hệ thống FallSense trên các thiết bị khác nhau.</p>
+                        
+                        <h3 id="system-requirements">Yêu cầu hệ thống</h3>
+                        <ul>
+                            <li><strong>Camera:</strong> Độ phân giải tối thiểu 720p, khuyến nghị 1080p</li>
+                            <li><strong>Kết nối internet:</strong> Tối thiểu 2Mbps upload/download</li>
+                            <li><strong>Thiết bị lưu trữ:</strong> Tối thiểu 32GB cho dữ liệu cục bộ</li>
+                            <li><strong>Hệ điều hành:</strong> Windows 10/11, macOS 10.15+, hoặc Linux (Ubuntu 20.04+)</li>
+                        </ul>
+                        
+                        <h3 id="setup-guide">Hướng dẫn cài đặt</h3>
+                        <ol>
+                            <li>Tải xuống phần mềm FallSense từ trang web chính thức</li>
+                            <li>Chạy tệp cài đặt và làm theo hướng dẫn trên màn hình</li>
+                            <li>Đăng nhập bằng tài khoản đã đăng ký</li>
+                            <li>Kết nối camera với hệ thống</li>
+                            <li>Cấu hình các thông số giám sát</li>
+                        </ol>
+                        <div class="warning">
+                            <p><strong>Cảnh báo:</strong> Không đặt camera ở những khu vực nhạy cảm về quyền riêng tư như phòng tắm.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="docs-section" id="user-guide">
+                        <h2>Hướng dẫn sử dụng</h2>
+                        <p>Phần này sẽ hướng dẫn bạn cách sử dụng các tính năng chính của hệ thống FallSense.</p>
+                        
+                        <h3 id="dashboard">Bảng điều khiển</h3>
+                        <p>Bảng điều khiển cung cấp tổng quan về hệ thống giám sát, bao gồm:</p>
+                        <ul>
+                            <li>Trạng thái kết nối camera</li>
+                            <li>Số lượng cảnh báo trong 24 giờ qua</li>
+                            <li>Thống kê hoạt động</li>
+                            <li>Trạng thái hệ thống</li>
+                        </ul>
+                        
+                        <h3 id="alerts">Cảnh báo</h3>
+                        <p>Khi hệ thống phát hiện té ngã, nó sẽ:</p>
+                        <ol>
+                            <li>Gửi thông báo đến ứng dụng di động</li>
+                            <li>Gửi email đến địa chỉ đã đăng ký</li>
+                            <li>Gửi tin nhắn SMS (nếu đã cấu hình)</li>
+                            <li>Lưu trữ video sự cố để xem lại sau</li>
+                        </ol>
+                        
+                        <h3 id="reports">Báo cáo</h3>
+                        <p>Hệ thống tạo báo cáo định kỳ về:</p>
+                        <ul>
+                            <li>Số lượng sự cố phát hiện</li>
+                            <li>Thời gian phản hồi trung bình</li>
+                            <li>Phân tích xu hướng</li>
+                            <li>Đề xuất cải thiện an toàn</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="docs-section" id="api-reference">
+                        <h2>Tài liệu API</h2>
+                        <p>FallSense cung cấp API để tích hợp với các hệ thống khác. Dưới đây là một số endpoint chính:</p>
+                        
+                        <pre><code>GET /api/v1/alerts
+GET /api/v1/alerts/{id}
+POST /api/v1/settings
+GET /api/v1/stats</code></pre>
+                        
+                        <p>Để biết thêm chi tiết, vui lòng tham khảo <a href="#">tài liệu API đầy đủ</a>.</p>
+                    </div>
+                    
+                    <div class="docs-section" id="troubleshooting">
+                        <h2>Xử lý sự cố</h2>
+                        <p>Dưới đây là một số vấn đề thường gặp và cách khắc phục:</p>
+                        
+                        <h3>Camera không kết nối</h3>
+                        <ol>
+                            <li>Kiểm tra kết nối internet</li>
+                            <li>Đảm bảo camera được cấp nguồn</li>
+                            <li>Kiểm tra cài đặt tường lửa</li>
+                            <li>Khởi động lại camera và hệ thống</li>
+                        </ol>
+                        
+                        <h3>Cảnh báo sai</h3>
+                        <ol>
+                            <li>Điều chỉnh độ nhạy phát hiện trong cài đặt</li>
+                            <li>Đảm bảo camera được đặt ở vị trí phù hợp</li>
+                            <li>Cập nhật phần mềm lên phiên bản mới nhất</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="docs-section" id="faq">
+                        <h2>Câu hỏi thường gặp</h2>
+                        
+                        <h3>FallSense có hoạt động khi mất internet không?</h3>
+                        <p>Có, hệ thống vẫn phát hiện té ngã và lưu trữ cục bộ. Tuy nhiên, thông báo sẽ không được gửi cho đến khi kết nối internet được khôi phục.</p>
+                        
+                        <h3>FallSense có bảo vệ quyền riêng tư không?</h3>
+                        <p>Có, FallSense sử dụng mã hóa end-to-end và chỉ lưu trữ video khi phát hiện sự cố. Dữ liệu được bảo vệ theo tiêu chuẩn GDPR và HIPAA.</p>
+                        
+                        <h3>Tôi có thể sử dụng camera hiện có không?</h3>
+                        <p>Có, FallSense tương thích với nhiều loại camera IP phổ biến. Vui lòng kiểm tra danh sách tương thích trong phần yêu cầu hệ thống.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="cta-content fade-in">
+            <h2>Sẵn sàng bảo vệ người thân của bạn?</h2>
+            <p>Đăng ký ngay hôm nay để trải nghiệm hệ thống phát hiện té ngã thông minh.</p>
+            <a href="login.html" class="primary-btn pulse">Thử ngay</a>
+        </div>
+    </section>
+
+    <footer class="landing-footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <div class="logo">
+                <img src="images/fallsense-logo.svg" alt="FallSense Logo">
+                FallSense
+            </div>
+                <p>Hệ thống phát hiện té ngã thông minh</p>
+            </div>
+            <div class="footer-links">
+                <div class="link-group">
+                    <h3>Sản phẩm</h3>
+                    <ul>
+                        <li><a href="landing-technology.html">Công nghệ</a></li>
+                        <li><a href="landing-pricing.html">Bảng giá</a></li>
+                        <li><a href="landing-docs.html">Tài liệu</a></li>
+                    </ul>
+                </div>
+                <div class="link-group">
+                    <h3>Công ty</h3>
+                    <ul>
+                        <li><a href="landing-about.html">Về chúng tôi</a></li>
+                        <li><a href="landing-blog.html">Blog</a></li>
+                        <li><a href="landing-contact.html">Liên hệ</a></li>
+                    </ul>
+                </div>
+                <div class="link-group">
+                    <h3>Hỗ trợ</h3>
+                    <ul>
+                        <li><a href="landing-docs.html">Hướng dẫn</a></li>
+                        <li><a href="landing-contact.html">Hỗ trợ kỹ thuật</a></li>
+                        <li><a href="landing-faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 FallSense. Hệ thống phát hiện té ngã thông minh.</p>
+        </div>
+    </footer>
+
+    <script src="js/animations.js"></script>
+    <script src="js/landing.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Toggle submenu
+            const menuItems = document.querySelectorAll('.has-submenu');
+            
+            menuItems.forEach(item => {
+                const link = item.querySelector('a');
+                
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    item.classList.toggle('active');
+                });
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Update active state
+                        document.querySelectorAll('.docs-menu a').forEach(link => {
+                            link.classList.remove('active');
+                        });
+                        this.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

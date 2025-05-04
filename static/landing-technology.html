@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Công nghệ - FallSense</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/landing.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="landing-header">
+        <nav class="landing-nav">
+            <div class="logo">
+                <img src="images/fallsense-logo.svg" alt="FallSense Logo">
+                FallSense
+            </div>
+            <ul class="nav-links">
+                <li><a href="landing.html">Trang chủ</a></li>
+                <li><a href="landing-technology.html" class="active">Công nghệ</a></li>
+                <li><a href="landing-pricing.html">Bảng giá</a></li>
+                <li><a href="landing-docs.html">Tài liệu</a></li>
+                <li><a href="landing-blog.html">Blog</a></li>
+                <li><a href="landing-contact.html">Liên hệ</a></li>
+            </ul>
+            <a href="login.html" class="try-now-btn">Thử ngay</a>
+        </nav>
+    </header>
+
+    <section class="hero" style="min-height: 80vh;">
+        <div class="hero-content">
+            <h1 class="slide-in-left">Công nghệ AI tiên tiến</h1>
+            <p class="fade-in">Khám phá công nghệ trí tuệ nhân tạo đằng sau hệ thống phát hiện té ngã FallSense.</p>
+        </div>
+        <div class="hero-image slide-in-right">
+            <img src="images/technology-hero.svg" alt="AI Technology">
+        </div>
+    </section>
+
+    <section class="tech-overview" style="padding: 5rem 5%; background-color: white;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto;">
+            <h2 class="section-title fade-in">Tổng quan công nghệ</h2>
+            <div class="tech-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem;">
+                <div class="tech-card fade-in" style="padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: all 0.3s ease;">
+                    <i class="fas fa-brain" style="font-size: 2.5rem; color: var(--primary-color); margin-bottom: 1.5rem;"></i>
+                    <h3 style="margin-bottom: 1rem;">Mô hình AI</h3>
+                    <p>Sử dụng mô hình YOLO kết hợp với ST-GCN (Spatial Temporal Graph Convolutional Network) để phát hiện và phân tích chuyển động của con người.</p>
+                </div>
+                <div class="tech-card fade-in" style="padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: all 0.3s ease;">
+                    <i class="fas fa-camera" style="font-size: 2.5rem; color: var(--primary-color); margin-bottom: 1.5rem;"></i>
+                    <h3 style="margin-bottom: 1rem;">Xử lý hình ảnh</h3>
+                    <p>Phân tích hình ảnh thời gian thực từ camera, trích xuất keypoints và theo dõi chuyển động của con người.</p>
+                </div>
+                <div class="tech-card fade-in" style="padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: all 0.3s ease;">
+                    <i class="fas fa-bolt" style="font-size: 2.5rem; color: var(--primary-color); margin-bottom: 1.5rem;"></i>
+                    <h3 style="margin-bottom: 1rem;">Phát hiện thời gian thực</h3>
+                    <p>Phân tích và phát hiện té ngã trong thời gian thực với độ trễ thấp, đảm bảo phản ứng nhanh chóng.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="ai-process" style="padding: 5rem 5%; background-color: #f8fafc;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto;">
+            <h2 class="section-title fade-in">Quy trình xử lý AI</h2>
+            <div class="process-steps" style="margin-top: 4rem;">
+                <div class="process-step slide-in-left" style="display: flex; align-items: center; margin-bottom: 3rem;">
+                    <div class="step-number" style="width: 60px; height: 60px; background-color: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold; margin-right: 2rem;">1</div>
+                    <div class="step-content">
+                        <h3 style="margin-bottom: 1rem;">Thu thập dữ liệu</h3>
+                        <p>Camera thu thập hình ảnh video thời gian thực và gửi đến hệ thống xử lý.</p>
+                    </div>
+                </div>
+                <div class="process-step fade-in" style="display: flex; align-items: center; margin-bottom: 3rem;">
+                    <div class="step-number" style="width: 60px; height: 60px; background-color: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold; margin-right: 2rem;">2</div>
+                    <div class="step-content">
+                        <h3 style="margin-bottom: 1rem;">Phát hiện con người</h3>
+                        <p>Mô hình YOLO phát hiện và theo dõi con người trong khung hình, trích xuất keypoints của cơ thể.</p>
+                    </div>
+                </div>
+                <div class="process-step fade-in" style="display: flex; align-items: center; margin-bottom: 3rem;">
+                    <div class="step-number" style="width: 60px; height: 60px; background-color: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold; margin-right: 2rem;">3</div>
+                    <div class="step-content">
+                        <h3 style="margin-bottom: 1rem;">Phân tích chuyển động</h3>
+                        <p>Mô hình ST-GCN phân tích chuỗi keypoints theo thời gian để nhận diện các mẫu chuyển động.</p>
+                    </div>
+                </div>
+                <div class="process-step slide-in-right" style="display: flex; align-items: center; margin-bottom: 3rem;">
+                    <div class="step-number" style="width: 60px; height: 60px; background-color: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold; margin-right: 2rem;">4</div>
+                    <div class="step-content">
+                        <h3 style="margin-bottom: 1rem;">Phát hiện té ngã</h3>
+                        <p>Hệ thống phân loại hành động và phát hiện các mẫu chuyển động bất thường liên quan đến té ngã.</p>
+                    </div>
+                </div>
+                <div class="process-step fade-in" style="display: flex; align-items: center;">
+                    <div class="step-number" style="width: 60px; height: 60px; background-color: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold; margin-right: 2rem;">5</div>
+                    <div class="step-content">
+                        <h3 style="margin-bottom: 1rem;">Cảnh báo và lưu trữ</h3>
+                        <p>Khi phát hiện té ngã, hệ thống gửi cảnh báo và lưu trữ sự kiện vào cơ sở dữ liệu để phân tích sau.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="tech-specs" style="padding: 5rem 5%; background-color: white;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto;">
+            <h2 class="section-title fade-in">Thông số kỹ thuật</h2>
+            <div class="specs-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem;">
+                <div class="specs-card fade-in" style="padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: all 0.3s ease;">
+                    <h3 style="margin-bottom: 1.5rem; color: var(--primary-color);">Mô hình AI</h3>
+                    <ul style="list-style: none;">
+                        <li style="margin-bottom: 0.8rem;"><strong>Pose Estimation:</strong> YOLO v8</li>
+                        <li style="margin-bottom: 0.8rem;"><strong>Action Recognition:</strong> ST-GCN</li>
+                        <li style="margin-bottom: 0.8rem;"><strong>Tracking:</strong> ByteTrack</li>
+                        <li><strong>Độ chính xác:</strong> >95% trong điều kiện ánh sáng tốt</li>
+                    </ul>
+                </div>
+                <div class="specs-card fade-in" style="padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: all 0.3s ease;">
+                    <h3 style="margin-bottom: 1.5rem; color: var(--primary-color);">Yêu cầu hệ thống</h3>
+                    <ul style="list-style: none;">
+                        <li style="margin-bottom: 0.8rem;"><strong>CPU:</strong> Intel Core i5 hoặc tương đương</li>
+                        <li style="margin-bottom: 0.8rem;"><strong>RAM:</strong> 8GB trở lên</li>
+                        <li style="margin-bottom: 0.8rem;"><strong>GPU:</strong> NVIDIA GTX 1650 hoặc tương đương</li>
+                        <li><strong>Hệ điều hành:</strong> Windows 10/11, Linux, macOS</li>
+                    </ul>
+                </div>
+                <div class="specs-card fade-in" style="padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: all 0.3s ease;">
+                    <h3 style="margin-bottom: 1.5rem; color: var(--primary-color);">Camera</h3>
+                    <ul style="list-style: none;">
+                        <li style="margin-bottom: 0.8rem;"><strong>Độ phân giải:</strong> 720p trở lên</li>
+                        <li style="margin-bottom: 0.8rem;"><strong>FPS:</strong> 15-30 fps</li>
+                        <li style="margin-bottom: 0.8rem;"><strong>Góc nhìn:</strong> Rộng, bao quát được toàn bộ phòng</li>
+                        <li><strong>Kết nối:</strong> IP Camera, USB, RTSP</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="cta-content fade-in">
+            <h2>Sẵn sàng trải nghiệm công nghệ tiên tiến?</h2>
+            <p>Đăng ký ngay hôm nay để bắt đầu sử dụng hệ thống phát hiện té ngã thông minh.</p>
+            <a href="login.html" class="primary-btn pulse">Thử ngay</a>
+        </div>
+    </section>
+
+    <footer class="landing-footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <div class="logo">
+                <img src="images/fallsense-logo.svg" alt="FallSense Logo">
+                FallSense
+            </div>
+                <p>Hệ thống phát hiện té ngã thông minh</p>
+            </div>
+            <div class="footer-links">
+                <div class="link-group">
+                    <h3>Sản phẩm</h3>
+                    <ul>
+                        <li><a href="landing-technology.html">Công nghệ</a></li>
+                        <li><a href="landing-pricing.html">Bảng giá</a></li>
+                        <li><a href="landing-docs.html">Tài liệu</a></li>
+                    </ul>
+                </div>
+                <div class="link-group">
+                    <h3>Công ty</h3>
+                    <ul>
+                        <li><a href="landing-about.html">Về chúng tôi</a></li>
+                        <li><a href="landing-blog.html">Blog</a></li>
+                        <li><a href="landing-contact.html">Liên hệ</a></li>
+                    </ul>
+                </div>
+                <div class="link-group">
+                    <h3>Hỗ trợ</h3>
+                    <ul>
+                        <li><a href="landing-docs.html">Hướng dẫn</a></li>
+                        <li><a href="landing-contact.html">Hỗ trợ kỹ thuật</a></li>
+                        <li><a href="landing-faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 FallSense. Hệ thống phát hiện té ngã thông minh.</p>
+        </div>
+    </footer>
+
+    <script src="js/animations.js"></script>
+    <script src="js/landing.js"></script>
+</body>
+</html>

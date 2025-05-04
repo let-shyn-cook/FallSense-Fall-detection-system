@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - FallSense</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/landing.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* FAQ page specific styles */
+        .faq-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+        
+        .faq-categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+        
+        .faq-category {
+            padding: 0.8rem 1.5rem;
+            background-color: white;
+            border-radius: 30px;
+            color: var(--secondary-color);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+        
+        .faq-category:hover, .faq-category.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .faq-list {
+            margin-top: 2rem;
+        }
+        
+        .faq-item {
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: 1.5rem;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s ease;
+        }
+        
+        .faq-item.active .faq-question {
+            background-color: rgba(37, 99, 235, 0.05);
+            color: var(--primary-color);
+        }
+        
+        .faq-question i {
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            max-height: 500px;
+        }
+        
+        .faq-answer p {
+            color: var(--secondary-color);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .faq-answer p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .faq-answer ul, .faq-answer ol {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+            color: var(--secondary-color);
+        }
+        
+        .faq-answer li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .faq-search {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
+        
+        .faq-search input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            padding-left: 3rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 30px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .faq-search input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+        }
+        
+        .faq-search i {
+            position: absolute;
+            left: 1.2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--secondary-color);
+        }
+        
+        .contact-support {
+            text-align: center;
+            background-color: white;
+            padding: 3rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-top: 4rem;
+        }
+        
+        .contact-support h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+        
+        .contact-support p {
+            color: var(--secondary-color);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .contact-options {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .contact-option {
+            display: flex;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: #f8fafc;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-option:hover {
+            background-color: rgba(37, 99, 235, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        .contact-option i {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-right: 1rem;
+        }
+        
+        .contact-option span {
+            font-weight: 500;
+            color: var(--text-color);
+        }
+    </style>
+</head>
+<body>
+    <header class="landing-header">
+        <nav class="landing-nav">
+            <div class="logo">
+                <img src="images/fallsense-logo.svg" alt="FallSense Logo">
+                FallSense
+            </div>
+            <ul class="nav-links">
+                <li><a href="landing.html">Trang chủ</a></li>
+                <li><a href="landing-technology.html">Công nghệ</a></li>
+                <li><a href="landing-pricing.html">Bảng giá</a></li>
+                <li><a href="landing-docs.html">Tài liệu</a></li>
+                <li><a href="landing-blog.html">Blog</a></li>
+                <li><a href="landing-contact.html">Liên hệ</a></li>
+            </ul>
+            <a href="login.html" class="try-now-btn">Thử ngay</a>
+        </nav>
+    </header>
+
+    <section class="hero" style="min-height: 50vh;">
+        <div class="hero-content">
+            <h1 class="slide-in-left">Câu hỏi thường gặp</h1>
+            <p class="fade-in">Tìm câu trả lời cho những câu hỏi phổ biến về hệ thống phát hiện té ngã FallSense.</p>
+        </div>
+        <div class="hero-image slide-in-right">
+            <img src="images/faq-hero.svg" alt="Frequently Asked Questions">
+        </div>
+    </section>
+
+    <section class="faq-section" style="padding: 5rem 5%; background-color: #f8fafc;">
+        <div class="faq-container">
+            <div class="faq-search fade-in">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Tìm kiếm câu hỏi..." id="faqSearch">
+            </div>
+            
+            <div class="faq-categories fade-in">
+                <div class="faq-category active" data-category="all">Tất cả</div>
+                <div class="faq-category" data-category="general">Thông tin chung</div>
+                <div class="faq-category" data-category="technical">Kỹ thuật</div>
+                <div class="faq-category" data-category="pricing">Giá cả</div>
+                <div class="faq-category" data-category="support">Hỗ trợ</div>
+            </div>
+            
+            <div class="faq-list">
+                <div class="faq-item fade-in" data-category="general">
+                    <div class="faq-question">
+                        <span>FallSense là gì?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>FallSense là hệ thống phát hiện té ngã thông minh sử dụng trí tuệ nhân tạo để giám sát và phát hiện các trường hợp té ngã, đặc biệt hữu ích cho người cao tuổi và những người cần được chăm sóc đặc biệt.</p>
+                        <p>Hệ thống sử dụng camera thông minh kết hợp với thuật toán AI tiên tiến để phát hiện té ngã với độ chính xác cao và gửi cảnh báo ngay lập tức đến người thân hoặc nhân viên y tế.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item fade-in" data-category="general">
+                    <div class="faq-question">
+                        <span>FallSense hoạt động như thế nào?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>FallSense hoạt động thông qua quy trình 4 bước:</p>
+                        <ol>
+                            <li><strong>Giám sát:</strong> Camera thông minh giám sát liên tục không gian sống.</li>
+                            <li><strong>Phát hiện:</strong> Thuật toán AI phân tích chuyển động và nhận diện các mẫu té ngã.</li>
+                            <li><strong>Cảnh báo:</strong> Khi phát hiện té ngã, hệ thống gửi thông báo ngay lập tức qua ứng dụng di động, email hoặc SMS.</li>
+                            <li><strong>Lưu trữ:</strong> Video sự cố được lưu trữ an toàn để xem lại sau.</li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <div class="faq-item fade-in" data-category="technical">
+                    <div class="faq-question">
+                        <span>FallSense có chính xác không?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Có, FallSense có độ chính xác rất cao. Thuật toán AI của chúng tôi đã được huấn luyện với hàng nghìn mẫu té ngã khác nhau và đạt độ chính xác trên 99% trong các thử nghiệm thực tế.</p>
+                        <p>Hệ thống cũng được thiết kế để giảm thiểu cảnh báo sai bằng cách phân biệt giữa té ngã thực sự và các chuyển động bình thường như ngồi xuống nhanh hoặc nằm xuống.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item fade-in" data-category="technical">
+                    <div class="faq-question">
+                        <span>FallSense có hoạt động khi mất internet không?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Có, FallSense vẫn phát hiện té ngã và lưu trữ cục bộ ngay cả khi mất kết nối internet. Tuy nhiên, thông báo sẽ không được gửi cho đến khi kết nối internet được khôi phục.</p>
+                        <p>Đối với những khu vực có kết nối internet không ổn định, chúng tôi khuyến nghị sử dụng thêm thiết bị dự phòng như bộ phát 4G để đảm bảo thông báo luôn được gửi kịp thời.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item fade-in" data-category="technical">
+                    <div class="faq-question">
+                        <span>FallSense có bảo vệ quyền riêng tư không?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Có, FallSense coi trọng quyền riêng tư của người dùng. Hệ thống sử dụng mã hóa end-to-end và chỉ lưu trữ video khi phát hiện sự cố. Dữ liệu được bảo vệ theo tiêu chuẩn GDPR và HIPAA.</p>
+                        <p>Người dùng có thể cấu hình các khu vực riêng tư trong không gian giám sát, nơi camera sẽ tự động làm mờ hình ảnh để bảo vệ quyền riêng tư.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item fade-in" data-category="technical">
+                    <div class="faq-question">
+                        <span>Tôi có thể sử dụng camera hiện có không?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Có, FallSense tương thích với nhiều loại camera IP phổ biến. Danh sách đầy đủ các camera tương thích có thể được tìm thấy trong phần yêu cầu hệ thống của tài liệu hướng dẫn.</p>
+                        <p>Tuy nhiên, để đạt hiệu quả tốt nhất, chúng tôi khuyến nghị sử dụng camera FallSense chuyên dụng đã được tối ưu hóa cho hệ thống.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item fade-in" data-category="pricing">
+                    <div class="faq-question">
+                        <span>FallSense có những gói dịch vụ nào?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>FallSense cung cấp 3 gói dịch vụ chính:</p>
+                        <ul>
+                            <li><strong>Gói Cơ bản:</strong> Giám sát 1 phòng, thông báo qua ứng dụng, lưu trữ video 7 ngày.</li>
+                            <li><strong>Gói Tiêu chuẩn:</strong> Giám sát 3 phòng, thông báo qua ứng dụng và SMS, lưu trữ video 30 ngày.</li>
+                            <li><strong>Gói Cao cấp:</strong> Giám sát không giới hạn phòng, thông báo qua ứng dụng, SMS và cuộc gọi tự động, lưu trữ video 90 ngày, hỗ trợ 24/7.</li>
+                        </ul>
+                        <p>Chi tiết về giá cả có thể xem tại trang <a href="landing-pricing.html">Bảng giá</a>.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item fade-in" data-category="pricing">
+                    <div class="faq-question">
+                        <span>Có phí cài đặt ban đầu không?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Đối với gói Cơ bản và Tiêu chuẩn, khách hàng có thể tự cài đặt hệ thống theo hướng dẫn mà không mất phí.</p>
+                        <p>Đối với gói Cao cấp, chúng tôi cung cấp dịch vụ cài đặt chuyên nghiệp miễn phí tại các thành phố lớn. Đối với các khu vực khác, có thể phát sinh phí di chuyển tùy theo khoảng cách.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item fade-in" data-category="support">
+                    <div class="faq-question">
+                        <span>Làm thế nào để đặt lịch demo sản phẩm?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Bạn có thể đặt lịch demo sản phẩm bằng cách:</p>
+                        <ul>
+                            <li>Điền vào biểu mẫu liên hệ trên trang <a href="landing-contact.html">Liên hệ</a></li>
+                            <li>Gọi trực tiếp đến số điện thoại +84 28 3864 7256</li>
+                            <li>Gửi email đến demo@fallsense.com</li>
+                        </ul>
+                        <p>Đội ngũ hỗ trợ sẽ liên hệ lại với bạn trong vòng 24 giờ để sắp xếp lịch demo phù hợp.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item fade-in" data-category="support">
+                    <div class="faq-question">
+                        <span>Tôi cần hỗ trợ kỹ thuật, liên hệ như thế nào?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Đối với hỗ trợ kỹ thuật, bạn có thể:</p>
+                        <ul>
+                            <li>Gửi email đến support@fallsense.com</li>
+                            <li>Gọi đến đường dây nóng hỗ trợ kỹ thuật 24/7 theo số +84 28 3864 7257</li>
+                            <li>Sử dụng tính năng chat trực tuyến trong ứng dụng FallSense</li>
+                        </ul>
+                        <p>Đội ngũ kỹ thuật sẽ hỗ trợ bạn trong thời gian sớm nhất.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item fade-in" data-category="support">
+                    <div class="faq-question">
+                        <span>Làm thế nào để trở thành đối tác của FallSense?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Chúng tôi luôn tìm kiếm các đối tác tiềm năng để mở rộng hệ sinh thái FallSense. Để trở thành đối tác, vui lòng gửi email đến partnership@fallsense.com với thông tin về công ty của bạn và lý do muốn hợp tác.</p>
+                        <p>Đội ngũ phát triển kinh doanh sẽ liên hệ lại để thảo luận chi tiết về các cơ hội hợp tác như phân phối sản phẩm, tích hợp công nghệ hoặc phát triển giải pháp tùy chỉnh.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-support fade-in">
+                <h3>Không tìm thấy câu trả lời bạn cần?</h3>
+                <p>Đội ngũ hỗ trợ của chúng tôi luôn sẵn sàng giúp đỡ bạn. Hãy liên hệ với chúng tôi qua một trong những cách dưới đây.</p>
+                <div class="contact-options">
+                    <a href="mailto:info@fallsense.com" class="contact-option">
+                        <i class="fas fa-envelope"></i>
+                        <span>Gửi email</span>
+                    </a>
+                    <a href="tel:+842838647256" class="contact-option">
+                        <i class="fas fa-phone-alt"></i>
+                        <span>Gọi điện</span>
+                    </a>
+                    <a href="landing-contact.html" class="contact-option">
+                        <i class="fas fa-comment-alt"></i>
+                        <span>Liên hệ trực tiếp</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="cta-content fade-in">
+            <h2>Sẵn sàng bảo vệ người thân của bạn?</h2>
+            <p>Đăng ký ngay hôm nay để trải nghiệm hệ thống phát hiện té ngã thông minh.</p>
+            <a href="login.html" class="primary-btn pulse">Thử ngay</a>
+        </div>
+    </section>
+
+    <footer class="landing-footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <div class="logo">
+                <img src="images/fallsense-logo.svg" alt="FallSense Logo">
+                FallSense
+            </div>
+                <p>Hệ thống phát hiện té ngã thông minh</p>
+            </div>
+            <div class="footer-links">
+                <div class="link-group">
+                    <h3>Sản phẩm</h3>
+                    <ul>
+                        <li><a href="landing-technology.html">Công nghệ</a></li>
+                        <li><a href="landing-pricing.html">Bảng giá</a></li>
+                        <li><a href="landing-docs.html">Tài liệu</a></li>
+                    </ul>
+                </div>
+                <div class="link-group">
+                    <h3>Công ty</h3>
+                    <ul>
+                        <li><a href="landing-about.html">Về chúng tôi</a></li>
+                        <li><a href="landing-blog.html">Blog</a></li>
+                        <li><a href="landing-contact.html">Liên hệ</a></li>
+                    </ul>
+                </div>
+                <div class="link-group">
+                    <h3>Hỗ trợ</h3>
+                    <ul>
+                        <li><a href="landing-docs.html">Hướng dẫn</a></li>
+                        <li><a href="landing-contact.html">Hỗ trợ kỹ thuật</a></li>
+                        <li><a href="landing-faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 FallSense. Hệ thống phát hiện té ngã thông minh.</p>
+        </div>
+    </footer>
+
+    <script src="js/animations.js"></script>
+    <script src="js/landing.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // FAQ accordion functionality
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', () => {
+                    // Toggle active class on the clicked item
+                    item.classList.toggle('active');
+                    
+                    // Close other items
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                });
+            });
+            
+            // Category filtering
+            const categories = document.querySelectorAll('.faq-category');
+            
+            categories.forEach(category => {
+                category.addEventListener('click', () => {
+                    // Update active category
+                    categories.forEach(cat => cat.classList.remove('active'));
+                    category.classList.add('active');
+                    
+                    const selectedCategory = category.getAttribute('data-category');
+                    
+                    // Filter FAQ items
+                    faqItems.forEach(item => {
+                        if (selectedCategory === 'all' || item.getAttribute('data-category') === selectedCategory) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // Search functionality
+            const searchInput = document.getElementById('faqSearch');
+            
+            searchInput.addEventListener('input', () => {
+                const searchTerm = searchInput.value.toLowerCase();
+                
+                faqItems.forEach(item => {
+                    const question = item.querySelector('.faq-question span').textContent.toLowerCase();
+                    const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+                    
+                    if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+                
+                // Reset category selection
+                categories.forEach(cat => cat.classList.remove('active'));
+                document.querySelector('.faq-category[data-category="all"]').classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

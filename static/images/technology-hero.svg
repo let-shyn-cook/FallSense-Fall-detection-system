@@ -1,0 +1,173 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400">
+  <!-- Background with gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f0f9ff" />
+      <stop offset="100%" stop-color="#dbeafe" />
+    </linearGradient>
+    <linearGradient id="techGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6" />
+      <stop offset="100%" stop-color="#1d4ed8" />
+    </linearGradient>
+    <linearGradient id="aiGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4f46e5" />
+      <stop offset="100%" stop-color="#4338ca" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="10" flood-color="rgba(0,0,0,0.15)"/>
+    </filter>
+  </defs>
+  
+  <!-- Main background -->
+  <rect width="800" height="400" fill="url(#bgGradient)" rx="12" ry="12"/>
+  
+  <!-- Decorative elements -->
+  <circle cx="700" cy="80" r="60" fill="#bfdbfe" opacity="0.4"/>
+  <circle cx="100" cy="320" r="80" fill="#bfdbfe" opacity="0.3"/>
+  
+  <!-- AI Brain visualization -->
+  <g transform="translate(150, 150)" filter="url(#shadow)">
+    <circle cx="0" cy="0" r="80" fill="white"/>
+    
+    <!-- Brain outline -->
+    <path d="M-40,-20 C-50,-40 -30,-60 -10,-55 C-5,-70 15,-70 20,-55 C40,-60 60,-40 50,-20 C60,-10 60,10 50,20 C60,40 40,60 20,55 C15,70 -5,70 -10,55 C-30,60 -50,40 -40,20 C-50,10 -50,-10 -40,-20" 
+          fill="none" stroke="#3b82f6" stroke-width="3"/>
+    
+    <!-- Neural network connections -->
+    <circle cx="-20" cy="-30" r="5" fill="#3b82f6"/>
+    <circle cx="20" cy="-30" r="5" fill="#3b82f6"/>
+    <circle cx="-30" cy="0" r="5" fill="#3b82f6"/>
+    <circle cx="30" cy="0" r="5" fill="#3b82f6"/>
+    <circle cx="-20" cy="30" r="5" fill="#3b82f6"/>
+    <circle cx="20" cy="30" r="5" fill="#3b82f6"/>
+    <circle cx="0" cy="-15" r="5" fill="#4f46e5"/>
+    <circle cx="0" cy="15" r="5" fill="#4f46e5"/>
+    
+    <line x1="-20" y1="-30" x2="0" y2="-15" stroke="#3b82f6" stroke-width="1"/>
+    <line x1="20" y1="-30" x2="0" y2="-15" stroke="#3b82f6" stroke-width="1"/>
+    <line x1="-30" y1="0" x2="0" y2="-15" stroke="#3b82f6" stroke-width="1"/>
+    <line x1="30" y1="0" x2="0" y2="-15" stroke="#3b82f6" stroke-width="1"/>
+    <line x1="-30" y1="0" x2="0" y2="15" stroke="#3b82f6" stroke-width="1"/>
+    <line x1="30" y1="0" x2="0" y2="15" stroke="#3b82f6" stroke-width="1"/>
+    <line x1="-20" y1="30" x2="0" y2="15" stroke="#3b82f6" stroke-width="1"/>
+    <line x1="20" y1="30" x2="0" y2="15" stroke="#3b82f6" stroke-width="1"/>
+    <line x1="0" y1="-15" x2="0" y2="15" stroke="#4f46e5" stroke-width="1"/>
+    
+    <!-- Pulse animation -->
+    <circle cx="0" cy="0" r="60" fill="none" stroke="#3b82f6" stroke-width="2" opacity="0.5">
+      <animate attributeName="r" values="60;70;60" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.5;0.2;0.5" dur="2s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+  
+  <!-- Fall detection visualization -->
+  <g transform="translate(400, 200)">
+    <!-- Camera frame -->
+    <rect x="-150" y="-100" width="300" height="200" rx="10" fill="white" filter="url(#shadow)"/>
+    
+    <!-- Camera view -->
+    <rect x="-140" y="-90" width="280" height="180" rx="5" fill="#f1f5f9"/>
+    
+    <!-- Person skeleton with fall detection -->
+    <g transform="translate(0, 0) scale(0.8)">
+      <!-- Standing person (faded) -->
+      <g opacity="0.3">
+        <circle cx="-20" cy="-60" r="15" fill="#64748b"/> <!-- Head -->
+        <line x1="-20" y1="-45" x2="-20" y2="0" stroke="#64748b" stroke-width="4"/> <!-- Body -->
+        <line x1="-20" y1="-35" x2="-50" y2="-20" stroke="#64748b" stroke-width="4"/> <!-- Left arm -->
+        <line x1="-20" y1="-35" x2="10" y2="-20" stroke="#64748b" stroke-width="4"/> <!-- Right arm -->
+        <line x1="-20" y1="0" x2="-40" y2="40" stroke="#64748b" stroke-width="4"/> <!-- Left leg -->
+        <line x1="-20" y1="0" x2="0" y2="40" stroke="#64748b" stroke-width="4"/> <!-- Right leg -->
+      </g>
+      
+      <!-- Falling person (highlighted) -->
+      <g transform="rotate(60)">
+        <circle cx="-20" cy="-60" r="15" fill="#ef4444"/> <!-- Head -->
+        <line x1="-20" y1="-45" x2="-20" y2="0" stroke="#ef4444" stroke-width="4"/> <!-- Body -->
+        <line x1="-20" y1="-35" x2="-50" y2="-20" stroke="#ef4444" stroke-width="4"/> <!-- Left arm -->
+        <line x1="-20" y1="-35" x2="10" y2="-20" stroke="#ef4444" stroke-width="4"/> <!-- Right arm -->
+        <line x1="-20" y1="0" x2="-40" y2="40" stroke="#ef4444" stroke-width="4"/> <!-- Left leg -->
+        <line x1="-20" y1="0" x2="0" y2="40" stroke="#ef4444" stroke-width="4"/> <!-- Right leg -->
+      </g>
+      
+      <!-- Motion trajectory -->
+      <path d="M-20,-60 C-10,-30 10,0 30,30" fill="none" stroke="#ef4444" stroke-width="2" stroke-dasharray="5,3"/>
+    </g>
+    
+    <!-- AI detection box -->
+    <rect x="-70" y="-40" width="120" height="100" rx="5" fill="none" stroke="#22c55e" stroke-width="2" stroke-dasharray="5,3">
+      <animate attributeName="stroke-opacity" values="1;0.5;1" dur="2s" repeatCount="indefinite"/>
+    </rect>
+    
+    <!-- Detection label -->
+    <rect x="-70" y="-60" width="80" height="20" rx="5" fill="#ef4444"/>
+    <text x="-30" y="-45" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="white" text-anchor="middle">FALL DETECTED</text>
+  </g>
+  
+  <!-- Technical elements -->
+  <g transform="translate(650, 200)">
+    <!-- Data processing visualization -->
+    <rect x="-100" y="-120" width="200" height="240" rx="10" fill="white" filter="url(#shadow)"/>
+    
+    <!-- Code/algorithm representation -->
+    <g transform="translate(0, -80)">
+      <rect x="-80" y="-15" width="160" height="30" rx="5" fill="#f1f5f9"/>
+      <text x="-70" y="0" font-family="monospace" font-size="10" fill="#3b82f6">if (fall_detected) {</text>
+    </g>
+    
+    <g transform="translate(0, -50)">
+      <rect x="-80" y="-15" width="160" height="30" rx="5" fill="#f1f5f9"/>
+      <text x="-60" y="0" font-family="monospace" font-size="10" fill="#3b82f6">  alert(contacts);</text>
+    </g>
+    
+    <g transform="translate(0, -20)">
+      <rect x="-80" y="-15" width="160" height="30" rx="5" fill="#f1f5f9"/>
+      <text x="-60" y="0" font-family="monospace" font-size="10" fill="#3b82f6">  save(event);</text>
+    </g>
+    
+    <g transform="translate(0, 10)">
+      <rect x="-80" y="-15" width="160" height="30" rx="5" fill="#f1f5f9"/>
+      <text x="-70" y="0" font-family="monospace" font-size="10" fill="#3b82f6">}</text>
+    </g>
+    
+    <!-- Data flow visualization -->
+    <g transform="translate(0, 60)">
+      <rect x="-80" y="-25" width="160" height="50" rx="5" fill="url(#techGradient)"/>
+      <text x="0" y="-5" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white" text-anchor="middle">REAL-TIME</text>
+      <text x="0" y="15" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white" text-anchor="middle">PROCESSING</text>
+    </g>
+    
+    <!-- Processing indicator -->
+    <g transform="translate(0, 100)">
+      <rect x="-60" y="-10" width="120" height="20" rx="10" fill="#f1f5f9"/>
+      <rect x="-60" y="-10" width="80" height="20" rx="10" fill="#3b82f6">
+        <animate attributeName="width" values="0;80;0" dur="2s" repeatCount="indefinite"/>
+      </rect>
+    </g>
+  </g>
+  
+  <!-- Connection lines between elements -->
+  <g>
+    <path d="M230,150 C280,170 320,180 350,200" fill="none" stroke="#3b82f6" stroke-width="2" stroke-dasharray="5,3"/>
+    <path d="M450,200 C500,200 520,200 550,200" fill="none" stroke="#3b82f6" stroke-width="2" stroke-dasharray="5,3"/>
+  </g>
+  
+  <!-- Technology labels -->
+  <g transform="translate(150, 250)">
+    <rect x="-50" y="-20" width="100" height="40" rx="20" fill="url(#aiGradient)"/>
+    <text x="0" y="5" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">AI MODEL</text>
+  </g>
+  
+  <g transform="translate(400, 320)">
+    <rect x="-70" y="-20" width="140" height="40" rx="20" fill="url(#techGradient)"/>
+    <text x="0" y="5" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">FALL DETECTION</text>
+  </g>
+  
+  <g transform="translate(650, 320)">
+    <rect x="-60" y="-20" width="120" height="40" rx="20" fill="#22c55e"/>
+    <text x="0" y="5" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">ALERTS</text>
+  </g>
+  
+  <!-- Binary data background element -->
+  <text x="50" y="380" font-family="monospace" font-size="10" fill="#94a3b8" opacity="0.3">10110101 01001010 11010101 00101010 10101010 01010101 10101010 10101010 01010101 10101010</text>
+</svg>
