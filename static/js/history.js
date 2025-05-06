@@ -187,7 +187,14 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('eventTrackId').textContent = item.track_id || 'N/A';
         document.getElementById('eventAction').textContent = item.action || 'Không xác định';
         document.getElementById('eventStatus').textContent = item.fall_detected ? 'Té ngã' : 'Bình thường';
-        document.getElementById('eventSnapshot').src = item.snapshot_url || '';
+        
+        // Sử dụng base64 image nếu có, nếu không thì dùng URL
+        const snapshotElement = document.getElementById('eventSnapshot');
+        if (item.snapshot_base64) {
+            snapshotElement.src = 'data:image/jpeg;base64,' + item.snapshot_base64;
+        } else {
+            snapshotElement.src = item.snapshot_url || '';
+        }
 
         modal.classList.add('visible');
     };

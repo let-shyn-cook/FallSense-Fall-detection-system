@@ -13,6 +13,7 @@ import json
 from dotenv import load_dotenv
 from queue import Queue
 from modules.database import Database
+import base64
 
 # Load biến môi trường từ file .env
 load_dotenv()
@@ -292,6 +293,10 @@ class VideoCamera:
 
         timestamp = datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
         
+        # Chuyển đổi frame thành base64
+        _, buffer = cv2.imencode('.jpg', frame)
+        img_base64 = base64.b64encode(buffer).decode('utf-8')
+        
         # Tạo event data với timestamp duy nhất
         event = {
             'timestamp': timestamp,
@@ -300,6 +305,7 @@ class VideoCamera:
             'action': self.current_actions[track_id],
             'fall_detected': True,
             'snapshot_url': f'/static/fall_images/{timestamp.replace(":", "_")}_{track_id}.jpg',
+            'snapshot_base64': img_base64,
             'video_url': f'/static/fall_videos/{timestamp.replace(":", "_")}_{track_id}.mp4',
             'location': 'Camera 1',
             'status': 'Detected',
@@ -368,7 +374,7 @@ class VideoCamera:
                 timestamp = event_data['timestamp']
                 track_id = event_data['track_id']
                 
-                # Lưu ảnh với timestamp duy nhất
+                # Lưu ảnh với timestamp duy nhất - vẫn giữ lại việc lưu file ảnh vào thư mục
                 image_filename = f'static/fall_images/{timestamp.replace(":", "_")}_{track_id}.jpg'
                 image_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), image_filename)
                 cv2.imwrite(image_path, frame)
@@ -394,7 +400,7 @@ class VideoCamera:
                                 writer.release()
                             continue
                 
-                # Lưu vào database
+                # Lưu vào database - bây giờ bao gồm cả base64 image
                 try:
                     db.save_fall_event(event_data)
                     
