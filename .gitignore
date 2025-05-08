@@ -2,8 +2,7 @@
 __pycache__/
 *.py[cod]
 
-# Model files
-*.pt
+
 *.engine
 *.onnx
 
