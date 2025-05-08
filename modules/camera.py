@@ -68,6 +68,12 @@ class VideoCamera:
                 # Reset biến theo dõi track_id khi bắt đầu phiên mới
                 self.processed_track_ids.clear()
                 
+                # Khởi tạo lại worker thread nếu cần
+                if not self.db_worker.is_alive():
+                    self.fall_event_queue = Queue()
+                    self.db_worker = threading.Thread(target=self._save_fall_event_worker, daemon=True)
+                    self.db_worker.start()
+                
                 # Sử dụng camera source từ biến môi trường
                 camera_source = os.getenv('CAMERA_SOURCE')
                 # Nếu là số, chuyển thành integer
@@ -124,6 +130,15 @@ class VideoCamera:
         # Dừng tất cả video writers
         for track_id in list(self.video_writers.keys()):
             self.stop_recording(track_id)
+            
+        # Xóa các track_id đã xử lý để phiên tiếp theo được coi là mới
+        self.processed_track_ids.clear()
+        
+        # Reset các biến theo dõi
+        self.frames_queues = {}
+        self.fall_systems = {}
+        self.current_actions = {}
+        self.fall_detected = {}
             
         # Dừng worker thread
         self.fall_event_queue.put(None)  # Signal để dừng worker
@@ -284,8 +299,9 @@ class VideoCamera:
             print(f"Warning: track_id {track_id} không tồn tại trong current_actions")
             return
             
-        # Kiểm tra xem track_id đã được xử lý trong phiên hiện tại chưa
+        # Chỉ lưu sự kiện khi phát hiện té ngã lần đầu tiên trong phiên hiện tại
         if track_id in self.processed_track_ids:
+            # Nếu đã xử lý track_id này rồi, không lưu lại
             return
             
         # Đánh dấu track_id đã được xử lý

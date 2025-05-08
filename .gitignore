@@ -27,14 +27,6 @@ static/fall_videos/
 # MongoDB data
 fall_events.json
 
-# Training logs and checkpoints
-runs/
-
-# Jupyter notebook checkpoints
-.ipynb_checkpoints/
-
-# Environment files
-.env
 
 # System files
 .DS_Store
